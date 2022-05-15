@@ -1,6 +1,7 @@
 import { Persona } from '../../models/persona.model';
 import { Component, OnInit } from '@angular/core';
 import { PersonaService } from 'src/app/services/persona.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-banner',
@@ -9,19 +10,41 @@ import { PersonaService } from 'src/app/services/persona.service';
 })
 export class BannerComponent implements OnInit {
 
-  public persona:Persona;
-  private url:String=""
+  public persona: Persona;
+  private url: String = ""
 
   constructor(private personaService: PersonaService) { }
 
   ngOnInit(): void {
-    this.personaService.getData().subscribe((data) =>{
-      this.persona= data;
+    this.personaService.getData().subscribe((data) => {
+      this.persona = data;
       console.log(data);
-      
 
-      
     });
+  }
+
+  public getPersona() {
+    this.personaService.getData().subscribe(
+      (data) => {
+        this.persona = data;
+        console.log(data);
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
+  }
+
+  public editPersona() {
+    document.getElementById("btn-cancelar").click();
+    this.personaService.updatePersona(this.persona).subscribe(
+      (respuesta: Persona) => {
+        console.log(respuesta);
+        this.getPersona();
+      },
+      (error: HttpErrorResponse) => { alert(error.message) }
+    );
+    
   }
 
 

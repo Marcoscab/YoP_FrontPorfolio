@@ -13,6 +13,7 @@ import { EducacionComponent } from './components/educacion/educacion.component';
 import { SkillsComponent } from './components/skills/skills.component';
 import { ProyectosComponent } from './components/proyectos/proyectos.component';
 import { PersonaService } from './services/persona.service';
+import { FormsModule } from '@angular/forms';
 
 
 const routes: Routes = [
@@ -41,7 +42,8 @@ const routerOptions: ExtraOptions = {
     BrowserModule,
     RouterModule,
     RouterModule.forRoot(routes, routerOptions),
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [PersonaService],
   bootstrap: [AppComponent]

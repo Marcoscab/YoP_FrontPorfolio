@@ -22,10 +22,58 @@
         </div>
       </div>
       <div class="col-lg-7 align-items-start">
-        <button class="btn btn-default bg-white rounded-pill border border-2 border-warning ">
+        <button class="btn btn-default bg-white rounded-pill border border-2 border-warning" data-bs-toggle="modal"
+          data-bs-target="#staticBackdrop">
           <img src="./assets/images/editar-texto.png" width="20" /></button>
       </div>
     </div>
   </div>
+</div>
 
+<!-- Modal Para Editar Persona -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Editar Persona</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="floatingInput" placeholder="" [(ngModel)]="persona.nombre">
+          <label for="floatingInput">Nombre</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="floatingInput" placeholder="" [(ngModel)]="persona.apellido">
+          <label for="floatingInput">Apellido</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="floatingInput" placeholder="" [(ngModel)]="persona.profesion">
+          <label for="floatingInput">Profesión</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="floatingInput" placeholder="" [(ngModel)]="persona.empresa_actual">
+          <label for="floatingInput">Empresa Actual</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="floatingInput" placeholder="" [(ngModel)]="persona.domicilio">
+          <label for="floatingInput">Domicilio</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input type="url" class="form-control" id="floatingInput" placeholder="" [(ngModel)]="persona.url_foto_perfil">
+          <label for="floatingInput">Foto Perfil</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input type="url" class="form-control" id="floatingInput" placeholder="" [(ngModel)]="persona.url_banner">
+          <label for="floatingInput">Foto Banner</label>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="btn-cancelar">Cancelar</button>
+        <button type="button" class="btn btn-primary" (click)="editPersona()">Guardar</button>
+      </div>
+    </div>
+  </div>
 </div>
