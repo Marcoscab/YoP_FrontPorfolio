@@ -1,0 +1,10 @@
+{
+    "id":1,
+    "nombre":"Marcos",
+    "apellido":"Stritzke",
+    "fecha_nacimiento":"1985-10-19T13:49:51.141Z",
+    "domicilio": "Córdoba, Argentina",
+    "acerca_de":"Ingeniero",
+    "url_foto_perfil":"./assets/images/yo.jpg",
+    "url_banner":"./assets/images/Banner_3.jpg"
+ }

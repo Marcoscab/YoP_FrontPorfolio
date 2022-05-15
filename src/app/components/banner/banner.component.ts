@@ -1,4 +1,6 @@
+import { Persona } from '../../models/persona.model';
 import { Component, OnInit } from '@angular/core';
+import { PersonaService } from 'src/app/services/persona.service';
 
 @Component({
   selector: 'app-banner',
@@ -7,9 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BannerComponent implements OnInit {
 
-  constructor() { }
+  public persona:Persona;
+  private url:String=""
+
+  constructor(private personaService: PersonaService) { }
 
   ngOnInit(): void {
+    this.personaService.getData().subscribe((data) =>{
+      this.persona= data;
+      console.log(data);
+      
+
+      
+    });
   }
+
 
 }

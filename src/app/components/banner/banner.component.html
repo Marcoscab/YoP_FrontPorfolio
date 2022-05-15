@@ -2,24 +2,30 @@
 <div class="mx-2 mb-3 border border-2 border-top-0  border-start-0 border-end-0">
 
   <!-- Imagen Banner -->
-  <div class="d-none d-lg-block">
-    <img class="img-fluid border-0 rounded " src="./assets/images/Banner_3.jpg" alt="">
+  <div class="d-none d-m-block d-lg-block">
+    <img class="img-fluid border-0 rounded " [src]="persona.url_banner" alt="Foto Banner">
   </div>
 
   <div class="px-2 ">
     <div class="row gx-2 align-items-center">
       <!--Foto Perfil-->
       <div class="col-lg-2">
-        <div class="p-3"><img class="img-fluid rounded-circle" src="./assets/images/yo.jpg" alt="..." /></div>
+        <div class="p-3"><img class="img-fluid rounded-circle" [src]="persona.url_foto_perfil" alt="Foto Perfil" />
+        </div>
       </div>
       <!--Datos Personales-->
-      <div class="col-lg-10">
+      <div class="col-lg-3">
         <div class="p-3 text-white">
-          <h2 class="display-6 p-0 text-primary fw-bolder">Marcos Stritzke</h2>
-          <p class="mb-0">Ingeniero Electrónico en De S SRL</p>
-          <p class=" fw-light mb-0">Ciudad de Córdoba, Argentina</p>
+          <h2 class="display-6 p-0 text-primary fw-bolder">{{persona.nombre}} {{persona.apellido}}</h2>
+          <p class="mb-0"> {{persona.profesion}} en {{persona.empresa_actual}}</p>
+          <p class=" fw-light mb-0">{{persona.domicilio}}</p>
         </div>
+      </div>
+      <div class="col-lg-7 align-items-start">
+        <button class="btn btn-default bg-white rounded-pill border border-2 border-warning ">
+          <img src="./assets/images/editar-texto.png" width="20" /></button>
       </div>
     </div>
   </div>
+
 </div>
