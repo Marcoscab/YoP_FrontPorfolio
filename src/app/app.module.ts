@@ -1,3 +1,4 @@
+import { UserService } from './services/user.service';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ExtraOptions, RouterModule, Routes } from '@angular/router';
@@ -45,7 +46,7 @@ const routerOptions: ExtraOptions = {
     HttpClientModule,
     FormsModule
   ],
-  providers: [PersonaService],
+  providers: [PersonaService,UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

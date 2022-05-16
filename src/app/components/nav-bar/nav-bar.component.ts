@@ -1,3 +1,6 @@
+import { HttpErrorResponse } from '@angular/common/http';
+import { UserService } from './../../services/user.service';
+import { Usuario } from './../../models/usuario.model';
 import { Component, OnInit } from '@angular/core';
 import { AppComponent } from 'src/app/app.component';
 
@@ -8,12 +11,12 @@ import { AppComponent } from 'src/app/app.component';
 })
 export class NavBarComponent implements OnInit {
 
-  constructor() { 
-
-  }
+  constructor(private userService:UserService) { }
 
   ngOnInit(): void {
-    
   }
+
+
+
 
 }

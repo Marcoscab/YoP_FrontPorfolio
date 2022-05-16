@@ -41,37 +41,37 @@
       </div>
       <div class="modal-body">
         <div class="form-floating mb-3">
-          <input type="text" class="form-control" id="floatingInput" placeholder="" [(ngModel)]="persona.nombre">
-          <label for="floatingInput">Nombre</label>
+          <input type="text" class="form-control" id="nombrePersona" placeholder="" [(ngModel)]="persona.nombre">
+          <label for="nombrePersona">Nombre</label>
         </div>
         <div class="form-floating mb-3">
-          <input type="text" class="form-control" id="floatingInput" placeholder="" [(ngModel)]="persona.apellido">
-          <label for="floatingInput">Apellido</label>
+          <input type="text" class="form-control" id="apellidoPersona" placeholder="" [(ngModel)]="persona.apellido">
+          <label for="apellidoPersona">Apellido</label>
         </div>
         <div class="form-floating mb-3">
-          <input type="text" class="form-control" id="floatingInput" placeholder="" [(ngModel)]="persona.profesion">
-          <label for="floatingInput">Profesión</label>
+          <input type="text" class="form-control" id="profesionPersona" placeholder="" [(ngModel)]="persona.profesion">
+          <label for="profesionPersona">Profesión</label>
         </div>
         <div class="form-floating mb-3">
-          <input type="text" class="form-control" id="floatingInput" placeholder="" [(ngModel)]="persona.empresa_actual">
-          <label for="floatingInput">Empresa Actual</label>
+          <input type="text" class="form-control" id="empresaPersona" placeholder="" [(ngModel)]="persona.empresa_actual">
+          <label for="empresaPersona">Empresa Actual</label>
         </div>
         <div class="form-floating mb-3">
-          <input type="text" class="form-control" id="floatingInput" placeholder="" [(ngModel)]="persona.domicilio">
-          <label for="floatingInput">Domicilio</label>
+          <input type="text" class="form-control" id="domicilioPersona" placeholder="" [(ngModel)]="persona.domicilio">
+          <label for="domicilioPersona">Domicilio</label>
         </div>
         <div class="form-floating mb-3">
-          <input type="url" class="form-control" id="floatingInput" placeholder="" [(ngModel)]="persona.url_foto_perfil">
-          <label for="floatingInput">Foto Perfil</label>
+          <input type="url" class="form-control" id="fotoPerfilPersona" placeholder="" [(ngModel)]="persona.url_foto_perfil">
+          <label for="fotoPerfilPersona">Foto Perfil</label>
         </div>
         <div class="form-floating mb-3">
-          <input type="url" class="form-control" id="floatingInput" placeholder="" [(ngModel)]="persona.url_banner">
-          <label for="floatingInput">Foto Banner</label>
+          <input type="url" class="form-control" id="fotoBannerPersona" placeholder="" [(ngModel)]="persona.url_banner">
+          <label for="fotoBannerPersona">Foto Banner</label>
         </div>
 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="btn-cancelar">Cancelar</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="btn-cancelar" (click)=" getPersona()">Cancelar</button>
         <button type="button" class="btn btn-primary" (click)="editPersona()">Guardar</button>
       </div>
     </div>

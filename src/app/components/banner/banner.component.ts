@@ -18,8 +18,7 @@ export class BannerComponent implements OnInit {
   ngOnInit(): void {
     this.personaService.getData().subscribe((data) => {
       this.persona = data;
-      console.log(data);
-
+      
     });
   }
 
@@ -27,7 +26,7 @@ export class BannerComponent implements OnInit {
     this.personaService.getData().subscribe(
       (data) => {
         this.persona = data;
-        console.log(data);
+        
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
@@ -39,7 +38,6 @@ export class BannerComponent implements OnInit {
     document.getElementById("btn-cancelar").click();
     this.personaService.updatePersona(this.persona).subscribe(
       (respuesta: Persona) => {
-        console.log(respuesta);
         this.getPersona();
       },
       (error: HttpErrorResponse) => { alert(error.message) }
