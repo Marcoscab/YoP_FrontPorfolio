@@ -1,8 +1,42 @@
-  <!-- ACERCA DE-->
-  <div class="mx-2 mb-3 px-2 text-white border border-2 border-top-0  border-start-0 border-end-0">
-   
-    <h1 class="display-6 ">Acerca de</h1>
-    <p class="col-12 px-3"> {{persona.acerca_de}}</p>
-    <p class="col-12 px-4"> * Certificado en EcoStruxure Buildng de Schneider Electric. Sistemas "BMS"</p>
-    <p class="col-12 px-4"> * Certificado en KNX. Automatización de viviendas y edificios.</p>
+<!-- ACERCA DE-->
+<div class="mx-2 mb-3 px-2 text-white border border-2 border-top-0  border-start-0 border-end-0">
+<div class="row">
+  <h1 class="display-6 col-2 align-middle">Acerca de</h1>
+  <div class=" col-10 align-items-start">
+    <button class="btn btn-default bg-white rounded-pill border border-2 border-warning align-middle" data-bs-toggle="modal"
+      data-bs-target="#editAcercaDe" *ngIf="userLogOnStatus">
+      <img src="./assets/images/editar-texto.png" width="20" />
+    </button>
   </div>
+</div>
+  <p class="col-12 px-3"> {{persona.acerca_de}}</p>
+  <div *ngFor="let certificado of listCertificados">
+    <p class="col-12 px-4"> * {{certificado.certificado}}</p>
+  </div>
+</div>
+
+
+
+<!-- Modal Para Editar Acera de -->
+<div class="modal fade" id="editAcercaDe" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="editAcercaDeLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editAcercaDeLabel">Editar Acerca de...</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="acercaDe" placeholder="" [(ngModel)]="persona.acerca_de">
+          <label for="acercaDe">Acerca de...</label>
+        </div>
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="btn-cancelar-acercade" (click)=" getPersona()">Cancelar</button>
+        <button type="button" class="btn btn-primary" (click)="editPersona()">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>

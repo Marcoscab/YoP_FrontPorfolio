@@ -1,6 +1,8 @@
+import { Certificado } from './../../models/certificado.model';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Persona } from 'src/app/models/persona.model';
+import { CertificadoService } from 'src/app/services/certificado.service';
 import { PersonaService } from 'src/app/services/persona.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -14,8 +16,9 @@ export class AcercaDeComponent implements OnInit {
   public persona: Persona = new Persona(1, "", "", new Date(), "", "", "", "", "", "");
   private url: String = ""
   public userLogOnStatus: boolean = false;
+  public listCertificados:Certificado[];
 
-  constructor(private userService: UserService, private personaService: PersonaService) { }
+  constructor(private userService: UserService, private personaService: PersonaService, private certificadoService:CertificadoService) { }
 
   ngOnInit(): void {
     this.personaService.getData().subscribe(
@@ -25,6 +28,11 @@ export class AcercaDeComponent implements OnInit {
     this.userService.userLogOn$.subscribe(
       (userSatus: boolean) => {this.userLogOnStatus = userSatus;}
     );
+
+      this.certificadoService.getCertificado().subscribe(
+        (response)=>{this.listCertificados=response;}
+      );
+
   }
 
 
@@ -36,7 +44,7 @@ export class AcercaDeComponent implements OnInit {
   }
 
   public editPersona() {
-    document.getElementById("btn-cancelar-banner").click();
+    document.getElementById("btn-cancelar-acercade").click();
     this.personaService.updatePersona(this.persona).subscribe(
       (respuesta: Persona) => { this.getPersona(); },
       (error: HttpErrorResponse) => { alert(error.message) }
