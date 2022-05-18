@@ -1,3 +1,4 @@
+import { UserService } from './../../services/user.service';
 import { Persona } from '../../models/persona.model';
 import { Component, OnInit } from '@angular/core';
 import { PersonaService } from 'src/app/services/persona.service';
@@ -10,16 +11,24 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class BannerComponent implements OnInit {
 
-  public persona: Persona;
+  public persona: Persona = new Persona(1,"","",new Date(),"","","","","","");
   private url: String = ""
 
-  constructor(private personaService: PersonaService) { }
+  public userLogOnStatus:boolean=false;
+
+  constructor(private personaService: PersonaService, private userService:UserService) { }
 
   ngOnInit(): void {
     this.personaService.getData().subscribe((data) => {
       this.persona = data;
-      
+            
     });
+
+   this.userService.userLogOn$.subscribe(
+      (userSatus:boolean)=>{
+        this.userLogOnStatus=userSatus;
+      }
+    );
   }
 
   public getPersona() {
@@ -35,7 +44,7 @@ export class BannerComponent implements OnInit {
   }
 
   public editPersona() {
-    document.getElementById("btn-cancelar").click();
+    document.getElementById("btn-cancelar-banner").click();
     this.personaService.updatePersona(this.persona).subscribe(
       (respuesta: Persona) => {
         this.getPersona();

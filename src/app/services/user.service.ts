@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { Usuario } from '../models/usuario.model';
 
 @Injectable({
@@ -8,20 +8,26 @@ import { Usuario } from '../models/usuario.model';
 })
 export class UserService {
 
-private url:string ="http://localhost:8080/porfolio/";
+  private url: string = "http://localhost:8080/porfolio/";
 
-private userFromDb:Usuario;
+  //Variable para saber si el usuario esta logueado.
+  private _userLogOnSource = new Subject<boolean>();
 
-private logueado=false;
+  userLogOn$ = this._userLogOnSource.asObservable();
 
 
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient) { }
 
   public getUser(): Observable<Usuario> {
 
-    return this.http.get<Usuario>(this.url+"user/1");
+    return this.http.get<Usuario>(this.url + "user/1");
   }
 
- 
+
+  updateUserLogOnStatus(userLogOnStatus: boolean) {
+    this._userLogOnSource.next(userLogOnStatus);
+  }
+
+
 
 }
