@@ -18,6 +18,7 @@ export class PersonaService {
 
   public updatePersona(persona: Persona): Observable<Persona> {
 
+    console.log(persona);
     return this.http.put<Persona>("http://localhost:8080/porfolio/editar2/1", persona);
   }
 

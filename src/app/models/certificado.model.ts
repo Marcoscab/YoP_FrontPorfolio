@@ -2,8 +2,7 @@
 export class Certificado{
 
 
-    constructor(private _id:number, private _certificado:string){}
-
+constructor(private _id:number,private _certificado:string){}
 
 set id(id:number){
     this._id= id;

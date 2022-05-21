@@ -6,6 +6,7 @@ import { CertificadoService } from 'src/app/services/certificado.service';
 import { PersonaService } from 'src/app/services/persona.service';
 import { UserService } from 'src/app/services/user.service';
 
+
 @Component({
   selector: 'app-acerca-de',
   templateUrl: './acerca-de.component.html',
@@ -16,22 +17,32 @@ export class AcercaDeComponent implements OnInit {
   public persona: Persona = new Persona(1, "", "", new Date(), "", "", "", "", "", "");
   private url: String = ""
   public userLogOnStatus: boolean = false;
-  public listCertificados:Certificado[];
+  public listCertificados: Certificado[];
+  public nuevoCertificado: Certificado = new Certificado(null, "");
+  public idCertificadoSelc:number=0;
+  public posicionArrayCertificado:number=0;
 
-  constructor(private userService: UserService, private personaService: PersonaService, private certificadoService:CertificadoService) { }
+  constructor(private userService: UserService, private personaService: PersonaService, private certificadoService: CertificadoService) { }
 
   ngOnInit(): void {
     this.personaService.getData().subscribe(
-      (response) => {this.persona = response;}
-    );  
-
-    this.userService.userLogOn$.subscribe(
-      (userSatus: boolean) => {this.userLogOnStatus = userSatus;}
+      (response) => {
+        this.persona = response;
+        console.log(response);
+      }
     );
 
-      this.certificadoService.getCertificado().subscribe(
-        (response)=>{this.listCertificados=response;}
-      );
+    this.userService.userLogOn$.subscribe(
+      (userSatus: boolean) => { this.userLogOnStatus = userSatus; }
+    );
+
+    this.certificadoService.getCertificado().subscribe(
+      (response) => {
+        this.listCertificados = response;
+        console.log(response);
+
+      }
+    );
 
   }
 
@@ -39,7 +50,7 @@ export class AcercaDeComponent implements OnInit {
   //Metodos para Acerca de.
   public getPersona() {
     this.personaService.getData().subscribe(
-      (response) => {this.persona = response;}
+      (response) => { this.persona = response; }
     );
   }
 
@@ -49,9 +60,41 @@ export class AcercaDeComponent implements OnInit {
       (respuesta: Persona) => { this.getPersona(); },
       (error: HttpErrorResponse) => { alert(error.message) }
     );
-    
+
   }
 
+
+  //Metodos para Certificados
+
+  public getCertificado() {
+    this.certificadoService.getCertificado().subscribe(
+      (response) => { this.listCertificados = response; }
+    );
+  }
+
+  public saveCertificado(): void {
+    this.certificadoService.addCertificado(this.nuevoCertificado).subscribe(
+      (response: Certificado) => {
+        this.getCertificado();
+        this.nuevoCertificado.certificado = "";
+      }
+    );
+    document.getElementById("btn-cancelar-agrearCertificado").click();
+
+  }
+
+  public deleteCertificado(i: number) {
+    this.idCertificadoSelc = this.listCertificados[i].id;
+    this.certificadoService.deleteCertificado(this.idCertificadoSelc).subscribe(
+      (response) => { this.getCertificado(); }
+    );
+    document.getElementById("btn-cancelar-borrarCertificado").click();
+  }
+
+
+  public consultaDeleteCertificado(i: number){
+    this.posicionArrayCertificado=i;
+     }
 
 
 
