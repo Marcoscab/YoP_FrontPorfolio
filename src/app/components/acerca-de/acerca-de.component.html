@@ -13,19 +13,25 @@
   <div *ngFor="let certificado of listCertificados ; index as i">
     <div class="d-flex flex-row">
       <div class="col-auto">
-        <p class="col-12 px-4"> * {{certificado.certificado}}</p>
+        <p class="px-4"> * {{certificado.certificado}}</p>
       </div>
       <div class="col-auto align-items-start">
-        <button class="btn btn-danger btn-circle" (click)="consultaDeleteCertificado(i)" data-bs-toggle="modal" 
-        data-bs-target="#borrarCertificado" *ngIf="userLogOnStatus">
+        <!-- Boton Eliminar certificado -->
+        <button class="btn btn-danger btn-circle" (click)="consultaDeleteCertificado(i)" data-bs-toggle="modal"
+          data-bs-target="#borrarCertificado" *ngIf="userLogOnStatus">
           <i class="fa fa-times"></i>
+        </button>
+        <!-- Boton Editar certificado -->
+        <button class="btn btn-success btn-circle mx-2" (click)="consultaDeleteCertificado(i)" data-bs-toggle="modal"
+          data-bs-target="#editCertificado" *ngIf="userLogOnStatus">
+          <i class="fas fa-edit"></i>
         </button>
       </div>
     </div>
   </div>
-
+<!-- Boton Agregar certificado -->
   <div class=" col-12 d-flex justify-content-center">
-    <button class="btn btn-success btn-circle  my-3" data-bs-toggle="modal" data-bs-target="#agregarCertificado"
+    <button class="btn btn-primary btn-circle  my-3" data-bs-toggle="modal" data-bs-target="#agregarCertificado"
       *ngIf="userLogOnStatus">
       <i class="fa-solid fa-plus"></i> Certificado
     </button>
@@ -90,21 +96,50 @@
 
 <!-- Modal Para Borrar Certificado-->
 <div class="modal fade" id="borrarCertificado" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-  aria-labelledby="borrarCertificado" aria-hidden="true">
+  aria-labelledby="borrarCertificadoLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="borrarCertificado">Boorrar Certificado</h5>
+        <h5 class="modal-title" id="borrarCertificado">Borrar Certificado</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <h6 class="text-danger">¿Desea borrar el certificado?</h6>
         <p *ngIf="posicionArrayCertificado>0">{{listCertificados[posicionArrayCertificado].certificado}}</p>
-        
+
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="btn-cancelar-borrarCertificado">Cancelar</button>
-        <button type="button" class="btn btn-danger" (click)="deleteCertificado(posicionArrayCertificado)" >Borrar</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+          id="btn-cancelar-borrarCertificado">Cancelar</button>
+        <button type="button" class="btn btn-danger"
+          (click)="deleteCertificado(posicionArrayCertificado)">Borrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal Para Editar Certificado -->
+<div class="modal fade" id="editCertificado" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="editCertificadoLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editCertificadoLabel">Editar Certificado</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-floating">
+          <textarea class="form-control" placeholder="" id="floatingEditCertificado" style="height: 200px"
+            [(ngModel)]="listCertificados[posicionArrayCertificado].certificado"></textarea>
+          <label for="floatingEditCertificado">Certificado:</label>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="btn-cancelar-editCertificado"
+          (click)=" getCertificado()">Cancelar</button>
+        <button type="button" class="btn btn-primary"  (click)="updateCertificado(posicionArrayCertificado)">Guardar</button>
       </div>
     </div>
   </div>

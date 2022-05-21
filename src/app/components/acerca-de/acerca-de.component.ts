@@ -97,5 +97,17 @@ export class AcercaDeComponent implements OnInit {
      }
 
 
+     public updateCertificado(i:number){
+      this.certificadoService.updateCertificado(this.listCertificados[i]).subscribe(
+        (response)=>{
+          console.log(response);
+          this.getCertificado();//Actualizo listado certificados.
+        }
+      );
+      document.getElementById("btn-cancelar-editCertificado").click();
+
+     }
+
+
 
 }
