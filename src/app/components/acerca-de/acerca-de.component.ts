@@ -19,8 +19,8 @@ export class AcercaDeComponent implements OnInit {
   public userLogOnStatus: boolean = false;
   public listCertificados: Certificado[];
   public nuevoCertificado: Certificado = new Certificado(null, "");
-  public idCertificadoSelc:number=0;
-  public posicionArrayCertificado:number=0;
+  public idCertificadoSelc:number=-1;
+  public posicionArrayCertificado:number=-1;
 
   constructor(private userService: UserService, private personaService: PersonaService, private certificadoService: CertificadoService) { }
 
@@ -28,7 +28,7 @@ export class AcercaDeComponent implements OnInit {
     this.personaService.getData().subscribe(
       (response) => {
         this.persona = response;
-        console.log(response);
+     
       }
     );
 
@@ -39,8 +39,7 @@ export class AcercaDeComponent implements OnInit {
     this.certificadoService.getCertificado().subscribe(
       (response) => {
         this.listCertificados = response;
-        console.log(response);
-
+    
       }
     );
 
@@ -86,7 +85,9 @@ export class AcercaDeComponent implements OnInit {
   public deleteCertificado(i: number) {
     this.idCertificadoSelc = this.listCertificados[i].id;
     this.certificadoService.deleteCertificado(this.idCertificadoSelc).subscribe(
-      (response) => { this.getCertificado(); }
+      (response) => {
+        this.posicionArrayCertificado=-1;
+        this.getCertificado(); }
     );
     document.getElementById("btn-cancelar-borrarCertificado").click();
   }
@@ -94,13 +95,14 @@ export class AcercaDeComponent implements OnInit {
 
   public consultaDeleteCertificado(i: number){
     this.posicionArrayCertificado=i;
-     }
+
+  }
 
 
      public updateCertificado(i:number){
-      this.certificadoService.updateCertificado(this.listCertificados[i]).subscribe(
+       this.certificadoService.updateCertificado(this.listCertificados[i]).subscribe(
         (response)=>{
-          console.log(response);
+          this.posicionArrayCertificado=-1;
           this.getCertificado();//Actualizo listado certificados.
         }
       );

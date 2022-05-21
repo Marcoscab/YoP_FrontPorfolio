@@ -2,7 +2,8 @@
 <div class="mx-2 mb-3 px-2 text-white border border-2 border-top-0  border-start-0 border-end-0">
   <div class="row align-middle">
     <h1 class="display-6 col-2">Acerca de</h1>
-    <div class=" col-10 align-items-start">
+    <div class=" col-auto align-items-start">
+      <!-- Boton Editar acerca de -->
       <button class="btn btn-success btn-circle" data-bs-toggle="modal" data-bs-target="#editAcercaDe"
         *ngIf="userLogOnStatus">
         <i class='fas fa-edit'></i>
@@ -105,7 +106,7 @@
       </div>
       <div class="modal-body">
         <h6 class="text-danger">¿Desea borrar el certificado?</h6>
-        <p *ngIf="posicionArrayCertificado>0">{{listCertificados[posicionArrayCertificado].certificado}}</p>
+        <p *ngIf="posicionArrayCertificado>=0">{{listCertificados[posicionArrayCertificado].certificado}}</p>
 
       </div>
       <div class="modal-footer">
@@ -130,8 +131,8 @@
       </div>
       <div class="modal-body">
         <div class="form-floating">
-          <textarea class="form-control" placeholder="" id="floatingEditCertificado" style="height: 200px"
-            [(ngModel)]="listCertificados[posicionArrayCertificado].certificado"></textarea>
+          <textarea class="form-control" placeholder="" id="floatingEditCertificado" style="height: 200px" *ngIf="posicionArrayCertificado>=0"
+             [(ngModel)]="listCertificados[posicionArrayCertificado].certificado"></textarea>
           <label for="floatingEditCertificado">Certificado:</label>
         </div>
 
