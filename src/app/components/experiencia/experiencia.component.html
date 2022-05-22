@@ -3,14 +3,78 @@
     <h1 class="display-6 ">Expericiencia</h1>
 
     <div class="row row-cols-1  g-4 py-2 text-white">
-      <div class="col d-flex align-items-start">
-        <img src="./assets/images/DeSSRL-logo.png" class="logo-Des-recortado" alt="Logo DeS recortado" >
+      <div class="col d-flex align-items-center" *ngFor="let experiencia of listExperiencia">
+
+        <img [src]="experiencia.url_logo" alt="Logo empresa" class="">
         <div>
-          <h4 class="fw-bold mb-0 ms-3 mt-3">Jefe del departamento de Ingeniería</h4>
-          <p class="ms-3 mb-0 fw-bolder">De S SRL - Full Time</p>
-          <p class="ms-3 mb-0 fw-lighter">2011 - Actualidad - 11 años.</p>
-          <p class="ms-3 fw-lighter">Córdoba, Argentina.</p>
+          <h4 class="fw-bold mb-0 ms-3 mt-3">{{experiencia.cargo}}</h4>
+          <p class="ms-3 mb-0 fw-bolder">{{experiencia.empresa}} - {{experiencia.dedicacion}}</p>
+          <p class="ms-3 mb-0 fw-lighter">{{experiencia.fecha_inicio}} - {{experiencia.fecha_fin}}</p>
+          <p class="ms-3 fw-lighter">{{experiencia.domicilio}}</p>
         </div>
+
+
       </div>
     </div>
+
+    <!-- Boton Agregar Experiencia -->
+  <div class=" col-12 d-flex justify-content-start">
+    <button class="btn btn-primary btn-circle my-3 ms-3" data-bs-toggle="modal" data-bs-target="#agregarExperiencia"
+      *ngIf="userLogOnStatus">
+      <i class="fa-solid fa-plus"></i> Expericiencia
+    </button>
   </div>
+  </div>
+
+
+
+  <!-- Modal Para Agrear Experiencia -->
+<div class="modal fade" id="agregarExperiencia" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+aria-labelledby="agregarExperienciaLabel" aria-hidden="true">
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="agregarExperienciaLabel">Editar Experiencia</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+
+    <div class="modal-body">
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="experienciaCargo" placeholder="" [(ngModel)]="experienciaNueva.cargo">
+        <label for="experienciaCargo">Cargo</label>
+      </div> 
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="experienciaEmpresa" placeholder="" [(ngModel)]="experienciaNueva.empresa">
+        <label for="experienciaEmpresa">Empresa</label>
+      </div> 
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="experienciaDedicacion" placeholder="" [(ngModel)]="experienciaNueva.dedicacion">
+        <label for="experienciaDedicacion">Dedicación</label>
+      </div> 
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="experienciaFechaInicio" placeholder="" [(ngModel)]="experienciaNueva.fecha_inicio">
+        <label for="experienciaFechaInicio">Fecha Inicio</label>
+      </div>
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="experienciaFechaFin" placeholder="" [(ngModel)]="experienciaNueva.fecha_fin">
+        <label for="experienciaFechaFin">Fecha Fin</label>
+      </div>
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="experienciaDomicilio" placeholder="" [(ngModel)]="experienciaNueva.domicilio">
+        <label for="experienciaDomicilio">Domicilio</label>
+      </div>
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="experienciaUrlImagen" placeholder="" [(ngModel)]="experienciaNueva.url_logo">
+        <label for="experienciaUrlImagen">Url Imagen</label>
+      </div>
+   
+    
+    </div>
+
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="btn-cancelar-experienciaAgregar" (click)=" getExperiencia()">Cancelar</button>
+      <button type="button" class="btn btn-primary" (click)="addExperiencia()">Guardar</button>
+    </div>
+  </div>
+</div>
+</div>
