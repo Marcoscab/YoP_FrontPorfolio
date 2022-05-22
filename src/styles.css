@@ -28,13 +28,13 @@
     border-radius: 10px;
 }
 
-.logo-Des-recortado {
-    width: 100px;
+.logo-recortado {
+    width: 81px;
     /* width of container */
-    height: 82px;
+    height: 75px;
     /* height of container */
     object-fit: cover;
-    object-position: 20px 0%;
+    object-position: 0px 0%;
     /* try 20px 10px */
 }
 

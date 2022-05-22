@@ -1,80 +1,189 @@
-  <!--EXPERIENCIA-->
-  <div class="mx-2 mb-3 px-2 text-white border border-2 border-top-0  border-start-0 border-end-0">
-    <h1 class="display-6 ">Expericiencia</h1>
+<!--EXPERIENCIA-->
+<div class="mx-2 mb-3 px-2 text-white border border-2 border-top-0  border-start-0 border-end-0">
+  <h1 class="display-6 ">Expericiencia</h1>
 
-    <div class="row row-cols-1  g-4 py-2 text-white">
-      <div class="col d-flex align-items-center" *ngFor="let experiencia of listExperiencia">
+  <div class="row row-cols-1  g-4 py-2 text-white" *ngFor="let experiencia of listExperiencia ; index as i">
 
-        <img [src]="experiencia.url_logo" alt="Logo empresa" class="">
-        <div>
-          <h4 class="fw-bold mb-0 ms-3 mt-3">{{experiencia.cargo}}</h4>
-          <p class="ms-3 mb-0 fw-bolder">{{experiencia.empresa}} - {{experiencia.dedicacion}}</p>
-          <p class="ms-3 mb-0 fw-lighter">{{experiencia.fecha_inicio}} - {{experiencia.fecha_fin}}</p>
-          <p class="ms-3 fw-lighter">{{experiencia.domicilio}}</p>
-        </div>
-
-
+    <div class="col d-flex align-items-center">
+      <img [src]="experiencia.url_logo" alt="Logo empresa" class="logo-recortado">
+      <div>
+        <h4 class="fw-bold mb-0 ms-3 mt-3">{{experiencia.cargo}}</h4>
+        <p class="ms-3 mb-0 fw-bolder">{{experiencia.empresa}} - {{experiencia.dedicacion}}</p>
+        <p class="ms-3 mb-0 fw-lighter">{{experiencia.fecha_inicio}} - {{experiencia.fecha_fin}}</p>
+        <p class="ms-3 fw-lighter">{{experiencia.domicilio}}</p>
       </div>
+
+      <div class="col-auto align-items-start ms-4">
+        <!-- Boton Eliminar Experiencia -->
+        <button class="btn btn-danger btn-circle" (click)="consultaDeleteExperiencia(i)" data-bs-toggle="modal"
+          data-bs-target="#borrarExperiencia" *ngIf="userLogOnStatus">
+          <i class="fa fa-times"></i>
+        </button>
+        <!-- Boton Editar Experiencia -->
+        <button class="btn btn-success btn-circle mx-2" (click)="consultaDeleteExperiencia(i)" data-bs-toggle="modal"
+          data-bs-target="#editExperiencia" *ngIf="userLogOnStatus">
+          <i class="fas fa-edit"></i>
+        </button>
+      </div>
+
+
     </div>
 
-    <!-- Boton Agregar Experiencia -->
+  </div>
+
+  <!-- Boton Agregar Experiencia -->
   <div class=" col-12 d-flex justify-content-start">
     <button class="btn btn-primary btn-circle my-3 ms-3" data-bs-toggle="modal" data-bs-target="#agregarExperiencia"
       *ngIf="userLogOnStatus">
       <i class="fa-solid fa-plus"></i> Expericiencia
     </button>
   </div>
-  </div>
+</div>
 
 
 
-  <!-- Modal Para Agrear Experiencia -->
+<!-- Modal Para Agrear Experiencia -->
 <div class="modal fade" id="agregarExperiencia" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-aria-labelledby="agregarExperienciaLabel" aria-hidden="true">
-<div class="modal-dialog">
-  <div class="modal-content">
-    <div class="modal-header">
-      <h5 class="modal-title" id="agregarExperienciaLabel">Editar Experiencia</h5>
-      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-    </div>
+  aria-labelledby="agregarExperienciaLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="agregarExperienciaLabel">Editar Experiencia</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
 
-    <div class="modal-body">
-      <div class="form-floating mb-3">
-        <input type="text" class="form-control" id="experienciaCargo" placeholder="" [(ngModel)]="experienciaNueva.cargo">
-        <label for="experienciaCargo">Cargo</label>
-      </div> 
-      <div class="form-floating mb-3">
-        <input type="text" class="form-control" id="experienciaEmpresa" placeholder="" [(ngModel)]="experienciaNueva.empresa">
-        <label for="experienciaEmpresa">Empresa</label>
-      </div> 
-      <div class="form-floating mb-3">
-        <input type="text" class="form-control" id="experienciaDedicacion" placeholder="" [(ngModel)]="experienciaNueva.dedicacion">
-        <label for="experienciaDedicacion">Dedicación</label>
-      </div> 
-      <div class="form-floating mb-3">
-        <input type="text" class="form-control" id="experienciaFechaInicio" placeholder="" [(ngModel)]="experienciaNueva.fecha_inicio">
-        <label for="experienciaFechaInicio">Fecha Inicio</label>
-      </div>
-      <div class="form-floating mb-3">
-        <input type="text" class="form-control" id="experienciaFechaFin" placeholder="" [(ngModel)]="experienciaNueva.fecha_fin">
-        <label for="experienciaFechaFin">Fecha Fin</label>
-      </div>
-      <div class="form-floating mb-3">
-        <input type="text" class="form-control" id="experienciaDomicilio" placeholder="" [(ngModel)]="experienciaNueva.domicilio">
-        <label for="experienciaDomicilio">Domicilio</label>
-      </div>
-      <div class="form-floating mb-3">
-        <input type="text" class="form-control" id="experienciaUrlImagen" placeholder="" [(ngModel)]="experienciaNueva.url_logo">
-        <label for="experienciaUrlImagen">Url Imagen</label>
-      </div>
-   
-    
-    </div>
+      <div class="modal-body">
 
-    <div class="modal-footer">
-      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="btn-cancelar-experienciaAgregar" (click)=" getExperiencia()">Cancelar</button>
-      <button type="button" class="btn btn-primary" (click)="addExperiencia()">Guardar</button>
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="experienciaCargo" placeholder=""
+            [(ngModel)]="experienciaNueva.cargo">
+          <label for="experienciaCargo">Cargo</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="experienciaEmpresa" placeholder=""
+            [(ngModel)]="experienciaNueva.empresa">
+          <label for="experienciaEmpresa">Empresa</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="experienciaDedicacion" placeholder=""
+            [(ngModel)]="experienciaNueva.dedicacion">
+          <label for="experienciaDedicacion">Dedicación</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="experienciaFechaInicio" placeholder=""
+            [(ngModel)]="experienciaNueva.fecha_inicio">
+          <label for="experienciaFechaInicio">Fecha Inicio</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="experienciaFechaFin" placeholder=""
+            [(ngModel)]="experienciaNueva.fecha_fin">
+          <label for="experienciaFechaFin">Fecha Fin</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="experienciaDomicilio" placeholder=""
+            [(ngModel)]="experienciaNueva.domicilio">
+          <label for="experienciaDomicilio">Domicilio</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="experienciaUrlImagen" placeholder=""
+            [(ngModel)]="experienciaNueva.url_logo">
+          <label for="experienciaUrlImagen">Url Imagen (Recomendado: 81*74 px)</label>
+        </div>
+
+
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="btn-cancelar-experienciaAgregar"
+          (click)=" getExperiencia()">Cancelar</button>
+        <button type="button" class="btn btn-primary" (click)="addExperiencia()">Guardar</button>
+      </div>
     </div>
   </div>
 </div>
+
+<!-- Modal Para Borrar Experiencia-->
+<div class="modal fade" id="borrarExperiencia" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="borrarExperienciaLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="borrarExperiencia">Borrar Experiencia</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div *ngIf="posicionArrayExperiencia>=0">
+          <h6 class="text-danger">¿Desea borrar la Experiencia?</h6>
+          <p *ngIf="posicionArrayExperiencia>=0">{{listExperiencia[posicionArrayExperiencia].cargo}} en
+            {{listExperiencia[posicionArrayExperiencia].empresa}}</p>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+          id="btn-cancelar-borrarExperiencia">Cancelar</button>
+        <button type="button" class="btn btn-danger"
+          (click)="deleteExperiencia(posicionArrayExperiencia)">Borrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal Para Editar Experiencia- -->
+<div class="modal fade" id="editExperiencia" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="editExperienciaLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editExperienciaLabel">Editar Experiencia</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div *ngIf="posicionArrayExperiencia>=0">
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="experienciaCargoEditar" placeholder=""
+              [(ngModel)]="listExperiencia[posicionArrayExperiencia].cargo">
+            <label for="experienciaCargoEditar">Cargo</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="experienciaEmpresaEditar" placeholder=""
+              [(ngModel)]="listExperiencia[posicionArrayExperiencia].empresa">
+            <label for="experienciaEmpresaEditar">Empresa</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="experienciaDedicacionEditar" placeholder=""
+              [(ngModel)]="listExperiencia[posicionArrayExperiencia].dedicacion">
+            <label for="experienciaDedicacionEditar">Dedicación</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="experienciaFechaInicioEditar" placeholder=""
+              [(ngModel)]="listExperiencia[posicionArrayExperiencia].fecha_inicio">
+            <label for="experienciaFechaInicioEditar">Fecha Inicio</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="experienciaFechaFinEditar" placeholder=""
+              [(ngModel)]="listExperiencia[posicionArrayExperiencia].fecha_fin">
+            <label for="experienciaFechaFinEditar">Fecha Fin</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="experienciaDomicilioEditar" placeholder=""
+              [(ngModel)]="listExperiencia[posicionArrayExperiencia].domicilio">
+            <label for="experienciaDomicilioEditar">Domicilio</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="experienciaUrlImagenEditar" placeholder=""
+              [(ngModel)]="listExperiencia[posicionArrayExperiencia].url_logo">
+            <label for="experienciaUrlImagenEditar">Url Imagen (Recomendado: 81*74 px)</label>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+          id="btn-cancelar-editExperiencia">Cancelar</button>
+        <button type="button" class="btn btn-primary"
+          (click)="updateExperiencia(posicionArrayExperiencia)">Guardar</button>
+      </div>
+    </div>
+  </div>
 </div>
