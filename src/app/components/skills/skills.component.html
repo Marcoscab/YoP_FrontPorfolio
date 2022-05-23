@@ -1,100 +1,207 @@
-  <!--HARD AND SOFT SKILLS-->
-  <div class="mx-2 mb-3 px-2 text-white border border-2 border-top-0  border-start-0 border-end-0" id="skills">
-    <h1 class="display-6 ">Habilidades</h1>
-    <div class="container px-4 py-4">
+<!--HARD AND SOFT SKILLS-->
+<div class="mx-2 mb-3 px-2 text-white border border-2 border-top-0  border-start-0 border-end-0" id="skills">
+  <h1 class="display-6 ">Habilidades</h1>
+  <div class="container px-4 py-4">
 
-      <!--Habilidades Idiomas-->
-      <h2 class="pb-2 border-bottom">Idiomas</h2>
-      <div class="row row-cols-1 row-cols-lg-6 g-4 py-4 mb-4">
+    <!--Habilidades Idiomas-->
+    <h2 class="pb-2 border-bottom">Idiomas</h2>
+    <div class="row row-cols-1 row-cols-lg-6 g-4 py-4 mb-4">
+      <div *ngFor="let idioma of listIdioma; index as i">
         <div class="col me-5">
           <div class="progress">
             <div class="progress-bar progress-bar-striped progress-bar-animated " role="progressbar" aria-valuenow="100"
-              aria-valuemin="0" aria-valuemax="100"  [ngStyle]="{'width':por}"></div>
+              aria-valuemin="0" aria-valuemax="100" [ngStyle]="{'width':idioma.nivel+'%'}"></div>
           </div>
-          <h5 class="pt-1 fst-italic">Español: Nativo</h5>
-        </div>
-
-        <div class="col me-5">
-          <div class="progress">
-            <div class="progress-bar progress-bar-striped progress-bar-animated " role="progressbar" aria-valuenow="75"
-              aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
+          <h5 class="pt-1 fst-italic">{{idioma.idioma}}</h5>
+          <!-- Botones -->
+          <div class="col-auto align-items-start ms-4">
+            <!-- Boton Eliminar Educacion -->
+            <button class="btn btn-danger btn-circle" (click)="consultaDeleteIdioma(i)" data-bs-toggle="modal"
+              data-bs-target="#borrarIdioma" *ngIf="userLogOnStatus">
+              <i class="fa fa-times"></i>
+            </button>
+            <!-- Boton Editar Educacion -->
+            <button class="btn btn-success btn-circle mx-2" (click)="consultaDeleteIdioma(i)" data-bs-toggle="modal"
+              data-bs-target="#editIdioma" *ngIf="userLogOnStatus">
+              <i class="fas fa-edit"></i>
+            </button>
           </div>
-          <h5 class="pt-1 fst-italic">Inglés</h5>
-        </div>
-      </div>
-
-      <!--Habilidades Progrmaicon-->
-      <h2 class="pb-2 border-bottom">Lenguajes Progrmación</h2>
-      <div class="row row-cols-1 row-cols-lg-6 g-4 py-4 mb-4">
-
-        <!--Java-->
-        <div class="col me-5">
-          <div class="progress">
-            <div class="progress-bar progress-bar-striped bg-success progress-bar-animated" role="progressbar"
-              aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 50%"></div>
-          </div>
-          <h5 class="pt-1 fst-italic">Java</h5>
-        </div>
-
-        <!--Spring Boot-->
-        <div class="col me-5">
-          <div class="progress">
-            <div class="progress-bar progress-bar-striped bg-success progress-bar-animated fw-bold" role="progressbar"
-              aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 30%"></div>
-          </div>
-          <h5 class="pt-1 fst-italic">Spring Boot</h5>
-        </div>
-
-        <!--HTML-CSS-BS5-->
-        <div class="col me-5">
-          <div class="progress">
-            <div class="progress-bar progress-bar-striped bg-success progress-bar-animated" role="progressbar"
-              aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 30%"></div>
-          </div>
-          <h5 class="pt-1 fst-italic">HTML-CSS-BS5</h5>
-        </div>
-
-        <!--Angular-->
-        <div class="col me-5">
-          <div class="progress">
-            <div class="progress-bar progress-bar-striped bg-success progress-bar-animated" role="progressbar"
-              aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 30%"></div>
-          </div>
-          <h5 class="pt-1 fst-italic">Angular</h5>
-        </div>
-
-        <!--MySQL-->
-        <div class="col">
-          <div class="progress">
-            <div class="progress-bar progress-bar-striped bg-success progress-bar-animated" role="progressbar"
-              aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 50%"></div>
-          </div>
-          <h5 class="pt-1 fst-italic">My SQL</h5>
-        </div>
-
-
-      </div>
-
-      <!--Herramientas informaticas-->
-      <h2 class="pb-2 border-bottom">Herramientas Informáticas</h2>
-      <div class="row row-cols-1 row-cols-lg-6 g-4 py-4 mb-4">
-        <div class="col me-5">
-          <div class="progress">
-            <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar"
-              aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
-          </div>
-          <h5 class="pt-1 fst-italic">Microsof Office</h5>
-        </div>
-
-        <div class="col me-5">
-          <div class="progress">
-            <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar"
-              aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
-          </div>
-          <h5 class="pt-1 fst-italic">AutoCad</h5>
         </div>
       </div>
+    </div>
+    <!-- Boton Agregar Idioma -->
+    <div class=" col-12 d-flex justify-content-start">
+      <button class="btn btn-primary btn-circle my-3 ms-3" data-bs-toggle="modal" data-bs-target="#agregarIdioma"
+        *ngIf="userLogOnStatus">
+        <i class="fa-solid fa-plus"></i> Idioma
+      </button>
+    </div>
+
+
+    <!--Habilidades Progrmaicon-->
+    <h2 class="pb-2 border-bottom">Lenguajes Progrmación</h2>
+    <div class="row row-cols-1 row-cols-lg-6 g-4 py-4 mb-4">
+
+      <!--Java-->
+      <div class="col me-5">
+        <div class="progress">
+          <div class="progress-bar progress-bar-striped bg-success progress-bar-animated" role="progressbar"
+            aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 50%"></div>
+        </div>
+        <h5 class="pt-1 fst-italic">Java</h5>
+      </div>
+
+      <!--Spring Boot-->
+      <div class="col me-5">
+        <div class="progress">
+          <div class="progress-bar progress-bar-striped bg-success progress-bar-animated fw-bold" role="progressbar"
+            aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 30%"></div>
+        </div>
+        <h5 class="pt-1 fst-italic">Spring Boot</h5>
+      </div>
+
+      <!--HTML-CSS-BS5-->
+      <div class="col me-5">
+        <div class="progress">
+          <div class="progress-bar progress-bar-striped bg-success progress-bar-animated" role="progressbar"
+            aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 30%"></div>
+        </div>
+        <h5 class="pt-1 fst-italic">HTML-CSS-BS5</h5>
+      </div>
+
+      <!--Angular-->
+      <div class="col me-5">
+        <div class="progress">
+          <div class="progress-bar progress-bar-striped bg-success progress-bar-animated" role="progressbar"
+            aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 30%"></div>
+        </div>
+        <h5 class="pt-1 fst-italic">Angular</h5>
+      </div>
+
+      <!--MySQL-->
+      <div class="col">
+        <div class="progress">
+          <div class="progress-bar progress-bar-striped bg-success progress-bar-animated" role="progressbar"
+            aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 50%"></div>
+        </div>
+        <h5 class="pt-1 fst-italic">My SQL</h5>
+      </div>
+
 
     </div>
 
+    <!--Herramientas informaticas-->
+    <h2 class="pb-2 border-bottom">Herramientas Informáticas</h2>
+    <div class="row row-cols-1 row-cols-lg-6 g-4 py-4 mb-4">
+      <div class="col me-5">
+        <div class="progress">
+          <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar"
+            aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
+        </div>
+        <h5 class="pt-1 fst-italic">Microsof Office</h5>
+      </div>
+
+      <div class="col me-5">
+        <div class="progress">
+          <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar"
+            aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
+        </div>
+        <h5 class="pt-1 fst-italic">AutoCad</h5>
+      </div>
+    </div>
+
   </div>
+
+</div>
+
+
+
+
+<!-- Modal Para Agrear Idioma -->
+<div class="modal fade" id="agregarIdioma" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="agregarIdiomaLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="agregarIdiomaLabel">Agregar Idioma</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body">
+
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="idiomaIdioma" placeholder="" [(ngModel)]="idiomaNuevo.idioma">
+          <label for="idiomaIdioma">Idioma</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="idiomaNivel" placeholder="" [(ngModel)]="idiomaNuevo.nivel">
+          <label for="idiomaNivel">Nivel (Número del 1 al 100)</label>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="btn-cancelar-idiomaAgregar"
+          (click)=" getIdioma()">Cancelar</button>
+        <button type="button" class="btn btn-primary" (click)="addIdioma()">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Para Borrar Idioma-->
+<div class="modal fade" id="borrarIdioma" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="borrarIdiomaLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="borrarIdioma">Borrar Idioma</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div *ngIf="posicionArrayIdioma>=0">
+          <h6 class="text-danger">¿Desea borrar el Idioma?</h6>
+          <p *ngIf="posicionArrayIdioma>=0">{{listIdioma[posicionArrayIdioma].idioma}}</p>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+          id="btn-cancelar-borrarIdioma">Cancelar</button>
+        <button type="button" class="btn btn-danger" (click)="deleteIdioma(posicionArrayIdioma)">Borrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal Para Editar Experiencia- -->
+<div class="modal fade" id="editIdioma" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="editIdiomaLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editIdiomaLabel">Editar Idioma</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div *ngIf="posicionArrayIdioma>=0">
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="IdiomaIdiomaEditar" placeholder=""
+              [(ngModel)]="listIdioma[posicionArrayIdioma].idioma">
+            <label for="IdiomaIdiomaEditar">Idioma</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="IdiomaNivelEditar" placeholder=""
+              [(ngModel)]="listIdioma[posicionArrayIdioma].nivel">
+            <label for="IdiomaNivelEditar">Nivel (Número del 1 al 100)</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="btn-cancelar-editIdioma">Cancelar</button>
+        <button type="button" class="btn btn-primary" (click)="updateIdioma(posicionArrayIdioma)">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
