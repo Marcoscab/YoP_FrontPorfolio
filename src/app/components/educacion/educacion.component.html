@@ -1,68 +1,168 @@
-  <!--EDUCACION-->
-  <div class="mx-2 mb-3 px-2 text-white border border-2 border-top-0  border-start-0 border-end-0">
-    <h1 class="display-6 ">Educación</h1>
+<!--EDUCACION-->
+<div class="mx-2 mb-3 px-2 text-white border border-2 border-top-0  border-start-0 border-end-0">
+  <h1 class="display-6 ">Educación</h1>
 
-    <div class="row row-cols-1 row-cols-lg-2  g-4 py-2 text-white">
 
-      <!--Universidad-->
+  <div class="row row-cols-1 row-cols-lg-2  g-4 py-2 text-white">
+    <div *ngFor="let educacion of listEducacion ; index as i">
       <div class="col d-flex align-items-center">
-        <img src="./assets/images/Logo UNC.png" alt="Logo UNC" class="logos">
+        <img [src]="educacion.url_logo" alt="Logo entidad" class="logos">
         <div>
-          <h4 class="fw-bold mb-0 ms-3 mt-3">Universidad Nacional de Córdoba</h4>
-          <p class="ms-3 mb-0 fw-bolder">Ingeniería Electrónica</p>
-          <p class="ms-3 mb-0 fw-lighter">2004 - 2011</p>
-          <p class="ms-3 fw-lighter">Córdoba, Argentina.</p>
+          <h4 class="fw-bold mb-0 ms-3 mt-3">{{educacion.entidad}}</h4>
+          <p class="ms-3 mb-0 fw-bolder">{{educacion.titulo}}</p>
+          <p class="ms-3 mb-0 fw-lighter">{{educacion.fecha_cursado}}</p>
+          <p class="ms-3 fw-lighter">{{educacion.domicilio}}</p>
         </div>
       </div>
-
-      <!--Secundario-->
-      <div class="col d-flex align-items-start">
-        <img src="./assets/images/Zuviria.png" alt="Logo UNC" class="logos ps-2">
-        <div>
-          <h4 class="fw-bold mb-0 ms-3 mt-3">Instituto Gustavo Martinez Zuviría</h4>
-          <p class="ms-3 mb-0 fw-bolder">Nivel Secundario. Especialización en Humanidades y Ciencias Sociales</p>
-          <p class="ms-3 mb-0 fw-lighter">1998 - 2003</p>
-          <p class="ms-3 fw-lighter">Córdoba, Argentina.</p>
-        </div>
+      <!-- Botones -->
+      <div class="col-auto align-items-start ms-4">
+        <!-- Boton Eliminar Educacion -->
+        <button class="btn btn-danger btn-circle" (click)="consultaDeleteEducacion(i)" data-bs-toggle="modal"
+          data-bs-target="#borrarEducacion" *ngIf="userLogOnStatus">
+          <i class="fa fa-times"></i>
+        </button>
+        <!-- Boton Editar Educacion -->
+        <button class="btn btn-success btn-circle mx-2" (click)="consultaDeleteEducacion(i)" data-bs-toggle="modal"
+          data-bs-target="#editEducacion" *ngIf="userLogOnStatus">
+          <i class="fas fa-edit"></i>
+        </button>
       </div>
-
-      <!--Inglés 1-->
-      <div class="col d-flex align-items-center">
-        <img src="./assets/images/Icana.svg" alt="Logo Icana" class="logos ps-2">
-        <div>
-          <h4 class="fw-bold mb-0 ms-3 mt-3">IICANA</h4>
-          <p class="ms-3 mb-0 fw-bolder">Idioma Inglés. Nivel 6th Adults</p>
-          <p class="ms-3 mb-0 fw-lighter">1997 - 2002</p>
-          <p class="ms-3 fw-lighter">Córdoba, Argentina.</p>
-        </div>
-      </div>
-
-      <!--Inglés 2-->
-      <div class="col d-flex align-items-center">
-        <img src="./assets/images/CulturaBritanica.png" alt="Logo CulturaBritanica" class="logos ps-2">
-        <div>
-          <h4 class="fw-bold mb-0 ms-3 mt-3">Asociación Argentina de Cultura Británica</h4>
-          <p class="ms-3 mb-0 fw-bolder">First Certificate in English / University of Cambridge (2004)</p>
-          <p class="ms-3 mb-0 fw-lighter">2002 - 2004</p>
-          <p class="ms-3 fw-lighter">Córdoba, Argentina.</p>
-        </div>
-      </div>
-
-      <!--Cisco-->
-      <div class="col d-flex align-items-center">
-        <img src="./assets/images/cisco_netacad_logo.png" alt="Logo Cisco" class="logos ps-2">
-        <div>
-          <h4 class="fw-bold mb-0 ms-3 mt-3">Cisco Certified Network Associated (CCNA)</h4>
-          <p class="ms-3 mb-0 fw-lighter"> <span class="fw-bold">CCNA 1: </span>Network Fundamentals 4.0 (2011)</p>
-          <p class="ms-3 mb-0 fw-lighter"><span class="fw-bold">CCNA 2: </span> Routing Protocols and Concepts 4.0
-            (2012)</p>
-          <p class="ms-3 mb-0 fw-lighter"><span class="fw-bold">CCNA 3: </span> LAN Switching and Wireless 4.0 (2013)
-          </p>
-          <p class="ms-3 fw-lighter">Córdoba, Argentina.</p>
-        </div>
-      </div>
-
 
     </div>
-
   </div>
+  <!-- Boton Agregar Educacion -->
+  <div class=" col-12 d-flex justify-content-start">
+    <button class="btn btn-primary btn-circle my-3 ms-3" data-bs-toggle="modal" data-bs-target="#agregarEducacion"
+      *ngIf="userLogOnStatus">
+      <i class="fa-solid fa-plus"></i> Educación
+    </button>
+  </div>
+
+</div>
+
+<!-- Modal Para Agrear Educacion -->
+<div class="modal fade" id="agregarEducacion" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="agregarEducacionLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="agregarEducacionLabel">Agregar Educacación</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body">
+
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="educacionEntidad" placeholder=""
+            [(ngModel)]="educacionNueva.entidad">
+          <label for="educacionEntidad">Entidad</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="educacionTitulo" placeholder=""
+            [(ngModel)]="educacionNueva.titulo">
+          <label for="educacionTitulo">Título</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="educacionFecha" placeholder=""
+            [(ngModel)]="educacionNueva.fecha_cursado">
+          <label for="educacionFecha">Fecha Cursado</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="educacionDomicilio" placeholder=""
+            [(ngModel)]="educacionNueva.domicilio">
+          <label for="educacionDomicilio">Lugar de Cursado</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="educacionUrlLogo" placeholder=""
+            [(ngModel)]="educacionNueva.url_logo">
+          <label for="educacionUrlLogo">Url Logo Entidad (Recomendado: 90*80 px)</label>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="btn-cancelar-educacionAgregar"
+          (click)=" getEducacion()">Cancelar</button>
+        <button type="button" class="btn btn-primary" (click)="addEducacion()">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal Para Borrar Educacion-->
+<div class="modal fade" id="borrarEducacion" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="borrarEducacionLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="borrarEducacion">Borrar Educación</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div *ngIf="posicionArrayEducacion>=0">
+          <h6 class="text-danger">¿Desea borrar la Educación?</h6>
+          <p *ngIf="posicionArrayEducacion>=0">{{listEducacion[posicionArrayEducacion].titulo}} en
+            {{listEducacion[posicionArrayEducacion].entidad}}</p>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+          id="btn-cancelar-borrarEducacion">Cancelar</button>
+        <button type="button" class="btn btn-danger" (click)="deleteEducacion(posicionArrayEducacion)">Borrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal Para Editar Experiencia- -->
+<div class="modal fade" id="editEducacion" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="editEducacionLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editEducacionLabel">Editar Educacación</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div *ngIf="posicionArrayEducacion>=0">
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="educacionEntidadEditar" placeholder=""
+              [(ngModel)]="listEducacion[posicionArrayEducacion].entidad">
+            <label for="educacionEntidadEditar">Entidad</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="educacionTituloEditar" placeholder=""
+              [(ngModel)]="listEducacion[posicionArrayEducacion].titulo">
+            <label for="educacionTituloEditar">Título</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="educacionFechaEditar" placeholder=""
+              [(ngModel)]="listEducacion[posicionArrayEducacion].fecha_cursado">
+            <label for="educacionFechaEditar">Fecha Cursado</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="educacionDomicilioEditar" placeholder=""
+              [(ngModel)]="listEducacion[posicionArrayEducacion].domicilio">
+            <label for="educacionDomicilioEditar">Lugar de Cursado</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="educacionUrlLogoEditar" placeholder=""
+              [(ngModel)]="listEducacion[posicionArrayEducacion].url_logo">
+            <label for="educacionUrlLogoEditar">Url Logo Entidad (Recomendado: 90*80 px)</label>
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+          id="btn-cancelar-editEducacion">Cancelar</button>
+        <button type="button" class="btn btn-primary"
+          (click)="updateEducacion(posicionArrayEducacion)">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>

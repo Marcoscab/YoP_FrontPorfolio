@@ -37,7 +37,7 @@ export class EducacionComponent implements OnInit {
   public getEducacion(){
     this.educacionService.getEducacion().subscribe(
       (response)=>{this.listEducacion=response;
-      console.log(response);
+      
     }
     );
   }
@@ -58,6 +58,7 @@ export class EducacionComponent implements OnInit {
         this.posicionArrayEducacion=-1;
       }
     );    
+    document.getElementById("btn-cancelar-editEducacion").click();
   }
 
 
