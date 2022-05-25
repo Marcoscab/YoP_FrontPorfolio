@@ -1,9 +1,11 @@
+import { HerramientaInformatica } from './../../models/herramienta-informatica.model';
 import { LenguajeProgramacionService } from './../../services/lenguaje-programacion.service';
 import { LenguajeProgramacion } from './../../models/lenguaje-programacion.model';
 import { Idioma } from './../../models/idioma.model';
 import { IdiomaService } from './../../services/idioma.service';
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
+import { HerramientaInformaticaService } from 'src/app/services/herramienta-informatica.service';
 
 @Component({
   selector: 'app-skills',
@@ -32,10 +34,21 @@ export class SkillsComponent implements OnInit {
 
   public idLenguajeSelc: number = -1;
 
+    //Atributos para Herramientas
+    public listHerramienta: HerramientaInformatica[];
+
+    public herramientaNueva: HerramientaInformatica = new HerramientaInformatica(null, "", "");
+  
+    public posicionArrayHerramienta: number = -1;
+  
+    public idHerramientaSelc: number = -1;
+
   constructor(
     private userService: UserService,
     private idiomaService: IdiomaService,
-    private lenguajeService: LenguajeProgramacionService) { }
+    private lenguajeService: LenguajeProgramacionService,
+    private herramientaService:HerramientaInformaticaService
+    ) { }
 
   ngOnInit(): void {
     this.userService.userLogOn$.subscribe(
@@ -43,7 +56,8 @@ export class SkillsComponent implements OnInit {
     );
     this.getIdioma();
     this.getLenguaje();
-    console.log(this.listLenguaje);
+    this.getHerramienta();
+    
   }
 
 
@@ -135,6 +149,50 @@ export class SkillsComponent implements OnInit {
 
   }
 
+
+    //----------------METODOS HERRAMIENTAS----------------//
+    public getHerramienta() {
+      this.herramientaService.getHerramienta().subscribe(
+        (response) => { this.listHerramienta = response; }
+      );
+    }
+  
+    public addHerramienta() {
+      this.herramientaService.addHerramienta(this.herramientaNueva).subscribe(
+        (response) => {
+          this.getHerramienta();
+          this.herramientaNueva = new HerramientaInformatica(null, "", "");
+          document.getElementById("btn-cancelar-herramientaAgregar").click();
+        }
+      );
+    }
+  
+    public deleteHerramienta(i: number) {
+      this.idHerramientaSelc = this.listHerramienta[i].id;
+      this.herramientaService.deleteHerramienta(this.idHerramientaSelc).subscribe(
+        (response) => {
+          this.posicionArrayHerramienta = -1;
+          this.getHerramienta();
+        }
+      );
+      document.getElementById("btn-cancelar-borrarHerramienta").click();
+    }
+  
+    public updateHerramienta(i: number) {
+      this.herramientaService.updateHerramienta(this.listHerramienta[i]).subscribe(
+        (response) => {
+          this.getHerramienta();
+          this.posicionArrayHerramienta = -1;
+        }
+      );
+      document.getElementById("btn-cancelar-editHerramienta").click();
+    }
+  
+  
+    public consultaDeleteHerramienta(i: number) {
+      this.posicionArrayHerramienta = i;
+  
+    }
 
 
 

@@ -9,8 +9,8 @@
       <div *ngFor="let idioma of listIdioma; index as i">
         <div class="col me-5">
           <div class="progress">
-            <div class="progress-bar progress-bar-striped progress-bar-animated bg-info" role="progressbar" aria-valuenow="100"
-              aria-valuemin="0" aria-valuemax="100" [ngStyle]="{'width':idioma.nivel+'%'}"></div>
+            <div class="progress-bar progress-bar-striped progress-bar-animated bg-info" role="progressbar"
+              aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" [ngStyle]="{'width':idioma.nivel+'%'}"></div>
           </div>
           <h5 class="pt-1 fst-italic">{{idioma.idioma}}</h5>
           <!-- Botones -->
@@ -37,15 +37,14 @@
       </button>
     </div>
 
-
     <!--Habilidades Progrmaicon-->
     <h2 class="pb-2 border-bottom text-success">Lenguajes Progrmación</h2>
     <div class="row row-cols-1 row-cols-lg-6 g-4 py-4 mb-2">
       <div *ngFor="let lenguaje of listLenguaje; index as i">
         <div class="col me-5">
           <div class="progress">
-            <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuenow="100"
-              aria-valuemin="0" aria-valuemax="100" [ngStyle]="{'width':lenguaje.nivel+'%'}"></div>
+            <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar"
+              aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" [ngStyle]="{'width':lenguaje.nivel+'%'}"></div>
           </div>
           <h5 class="pt-1 fst-italic">{{lenguaje.lenguaje}}</h5>
           <!-- Botones -->
@@ -75,21 +74,36 @@
     <!--Herramientas informaticas-->
     <h2 class="pb-2 border-bottom text-warning">Herramientas Informáticas</h2>
     <div class="row row-cols-1 row-cols-lg-6 g-4 py-4 mb-4">
-      <div class="col me-5">
-        <div class="progress">
-          <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar"
-            aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
+      <div *ngFor="let herramienta of listHerramienta; index as i">
+        <div class="col me-5">
+          <div class="progress">
+            <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar"
+              aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" [ngStyle]="{'width':herramienta.nivel+'%'}">
+            </div>
+          </div>
+          <h5 class="pt-1 fst-italic">{{herramienta.herramienta}}</h5>
+          <!-- Botones -->
+          <div class="col-auto align-items-start ms-4">
+            <!-- Boton Eliminar Herramienta -->
+            <button class="btn btn-danger btn-circle" (click)="consultaDeleteHerramienta(i)" data-bs-toggle="modal"
+              data-bs-target="#borrarHerramienta" *ngIf="userLogOnStatus">
+              <i class="fa fa-times"></i>
+            </button>
+            <!-- Boton Editar Herramienta -->
+            <button class="btn btn-success btn-circle mx-2" (click)="consultaDeleteHerramienta(i)" data-bs-toggle="modal"
+              data-bs-target="#editHerramienta" *ngIf="userLogOnStatus">
+              <i class="fas fa-edit"></i>
+            </button>
+          </div>
         </div>
-        <h5 class="pt-1 fst-italic">Microsof Office</h5>
       </div>
-
-      <div class="col me-5">
-        <div class="progress">
-          <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar"
-            aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
-        </div>
-        <h5 class="pt-1 fst-italic">AutoCad</h5>
-      </div>
+    </div>
+    <!-- Boton Agregar Herramienta -->
+    <div class=" col-12 d-flex justify-content-start mb-2">
+      <button class="btn btn-primary btn-circle my-3 ms-3" data-bs-toggle="modal" data-bs-target="#agregarHerramienta"
+        *ngIf="userLogOnStatus">
+        <i class="fa-solid fa-plus"></i> Herramienta
+      </button>
     </div>
 
   </div>
@@ -203,7 +217,8 @@
       <div class="modal-body">
 
         <div class="form-floating mb-3">
-          <input type="text" class="form-control" id="lenguajeLenguaje" placeholder="" [(ngModel)]="lenguajeNuevo.lenguaje">
+          <input type="text" class="form-control" id="lenguajeLenguaje" placeholder=""
+            [(ngModel)]="lenguajeNuevo.lenguaje">
           <label for="lenguajeLenguaje">Lenguaje de Programación</label>
         </div>
         <div class="form-floating mb-3">
@@ -234,7 +249,7 @@
         <div *ngIf="posicionArrayLenguaje>=0">
           <h6 class="text-danger">¿Desea borrar el Lenguaje de Programación?</h6>
           <p *ngIf="posicionArrayLenguaje>=0">{{listLenguaje[posicionArrayLenguaje].lenguaje}} </p>
-        
+
         </div>
       </div>
 
@@ -275,6 +290,95 @@
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
           id="btn-cancelar-editLenguaje">Cancelar</button>
         <button type="button" class="btn btn-primary" (click)="updateLenguaje(posicionArrayLenguaje)">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!------------------------------------ Modales Para HERRAMIENTA ------------------------------------>
+<!-- Modal Para Agrear Herramienta -->
+<div class="modal fade" id="agregarHerramienta" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="agregarHerramientaLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="agregarHerramientaLabel">Agregar Herramienta Informática</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="herramientaHerramienta" placeholder=""
+            [(ngModel)]="herramientaNueva.herramienta">
+          <label for="herramientaHerramienta">Herramienta Informática</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="herramientaNivel" placeholder=""
+            [(ngModel)]="herramientaNueva.nivel">
+          <label for="herramientaNivel">Nivel (Número del 1 al 100)</label>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="btn-cancelar-herramientaAgregar"
+          (click)=" getHerramienta()">Cancelar</button>
+        <button type="button" class="btn btn-primary" (click)="addHerramienta()">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Para Borrar Herramienta-->
+<div class="modal fade" id="borrarHerramienta" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="borrarHerramientaLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="borrarHerramienta">Borrar Herramienta Informática</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div *ngIf="posicionArrayHerramienta>=0">
+          <h6 class="text-danger">¿Desea borrar Herramienta Informática?</h6>
+          <p *ngIf="posicionArrayHerramienta>=0">{{listHerramienta[posicionArrayHerramienta].herramienta}} </p>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+          id="btn-cancelar-borrarHerramienta">Cancelar</button>
+        <button type="button" class="btn btn-danger" (click)="deleteHerramienta(posicionArrayHerramienta)">Borrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Para Editar Herramienta-->
+<div class="modal fade" id="editHerramienta" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="editHerramientaLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editHerramientaLabel">Editar Herramienta Informática</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div *ngIf="posicionArrayHerramienta>=0">
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="herramientaHerramientaEditar" placeholder=""
+              [(ngModel)]="listHerramienta[posicionArrayHerramienta].herramienta">
+            <label for="herramientaHerramientaEditar">Herramienta Informática</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="herramientaNivelEditar" placeholder=""
+              [(ngModel)]="listHerramienta[posicionArrayHerramienta].nivel">
+            <label for="herramientaNivelEditar">Nivel (Número del 1 al 100)</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+          id="btn-cancelar-editHerramienta">Cancelar</button>
+        <button type="button" class="btn btn-primary" (click)="updateHerramienta(posicionArrayHerramienta)">Guardar</button>
       </div>
     </div>
   </div>
