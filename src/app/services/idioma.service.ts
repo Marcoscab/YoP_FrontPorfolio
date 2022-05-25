@@ -10,42 +10,42 @@ export class IdiomaService {
 
   private url: string = "http://localhost:8080/porfolio";
 
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-public getIdioma():Observable<Idioma[]>{
+  public getIdioma(): Observable<Idioma[]> {
 
-  return this.http.get<Idioma[]>(this.url+"/habilidad/idioma/all");
+    return this.http.get<Idioma[]>(this.url + "/habilidad/idioma/all");
 
-}
+  }
 
-public addIdioma(idioma:Idioma):Observable<void>{
+  public addIdioma(idioma: Idioma): Observable<void> {
 
-  let json = {
-    "id": idioma.id,
-    "idioma": idioma.idioma,
-    "nivel": idioma.nivel
-  };
+    let json = {
+      "id": idioma.id,
+      "idioma": idioma.idioma,
+      "nivel": idioma.nivel
+    };
 
-  return this.http.post<void>(this.url+"/habilidad/idioma/add",json);
-}
-
-
-public updateIdioma(idioma:Idioma):Observable<void>{
-
-  let json = {
-    "id": idioma.id,
-    "idioma": idioma.idioma,
-    "nivel": idioma.nivel
-  };
-
-  return this.http.put<void>(this.url+"/habilidad/idioma/edit/"+idioma.id,json);
-
-}
+    return this.http.post<void>(this.url + "/habilidad/idioma/add", json);
+  }
 
 
-public deleteIdioma(id:number):Observable<void>{
+  public updateIdioma(idioma: Idioma): Observable<void> {
 
-  return this.http.delete<void>(this.url+"/habilidad/idioma/delete/"+id);
-}
+    let json = {
+      "id": idioma.id,
+      "idioma": idioma.idioma,
+      "nivel": idioma.nivel
+    };
+
+    return this.http.put<void>(this.url + "/habilidad/idioma/edit/" + idioma.id, json);
+
+  }
+
+
+  public deleteIdioma(id: number): Observable<void> {
+
+    return this.http.delete<void>(this.url + "/habilidad/idioma/delete/" + id);
+  }
 
 }

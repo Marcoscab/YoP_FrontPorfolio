@@ -4,12 +4,12 @@
   <div class="container px-4 py-4">
 
     <!--Habilidades Idiomas-->
-    <h2 class="pb-2 border-bottom">Idiomas</h2>
-    <div class="row row-cols-1 row-cols-lg-6 g-4 py-4 mb-4">
+    <h2 class="pb-2 border-bottom text-info">Idiomas</h2>
+    <div class="row row-cols-1 row-cols-lg-6 g-4 py-4 mb-2">
       <div *ngFor="let idioma of listIdioma; index as i">
         <div class="col me-5">
           <div class="progress">
-            <div class="progress-bar progress-bar-striped progress-bar-animated " role="progressbar" aria-valuenow="100"
+            <div class="progress-bar progress-bar-striped progress-bar-animated bg-info" role="progressbar" aria-valuenow="100"
               aria-valuemin="0" aria-valuemax="100" [ngStyle]="{'width':idioma.nivel+'%'}"></div>
           </div>
           <h5 class="pt-1 fst-italic">{{idioma.idioma}}</h5>
@@ -30,7 +30,7 @@
       </div>
     </div>
     <!-- Boton Agregar Idioma -->
-    <div class=" col-12 d-flex justify-content-start">
+    <div class=" col-12 d-flex justify-content-start mb-2">
       <button class="btn btn-primary btn-circle my-3 ms-3" data-bs-toggle="modal" data-bs-target="#agregarIdioma"
         *ngIf="userLogOnStatus">
         <i class="fa-solid fa-plus"></i> Idioma
@@ -39,59 +39,41 @@
 
 
     <!--Habilidades Progrmaicon-->
-    <h2 class="pb-2 border-bottom">Lenguajes Progrmación</h2>
-    <div class="row row-cols-1 row-cols-lg-6 g-4 py-4 mb-4">
-
-      <!--Java-->
-      <div class="col me-5">
-        <div class="progress">
-          <div class="progress-bar progress-bar-striped bg-success progress-bar-animated" role="progressbar"
-            aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 50%"></div>
+    <h2 class="pb-2 border-bottom text-success">Lenguajes Progrmación</h2>
+    <div class="row row-cols-1 row-cols-lg-6 g-4 py-4 mb-2">
+      <div *ngFor="let lenguaje of listLenguaje; index as i">
+        <div class="col me-5">
+          <div class="progress">
+            <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuenow="100"
+              aria-valuemin="0" aria-valuemax="100" [ngStyle]="{'width':lenguaje.nivel+'%'}"></div>
+          </div>
+          <h5 class="pt-1 fst-italic">{{lenguaje.lenguaje}}</h5>
+          <!-- Botones -->
+          <div class="col-auto align-items-start ms-4">
+            <!-- Boton Eliminar Lenguaje -->
+            <button class="btn btn-danger btn-circle" (click)="consultaDeleteLenguaje(i)" data-bs-toggle="modal"
+              data-bs-target="#borrarLenguaje" *ngIf="userLogOnStatus">
+              <i class="fa fa-times"></i>
+            </button>
+            <!-- Boton Editar Lenguaje -->
+            <button class="btn btn-success btn-circle mx-2" (click)="consultaDeleteLenguaje(i)" data-bs-toggle="modal"
+              data-bs-target="#editLenguaje" *ngIf="userLogOnStatus">
+              <i class="fas fa-edit"></i>
+            </button>
+          </div>
         </div>
-        <h5 class="pt-1 fst-italic">Java</h5>
       </div>
-
-      <!--Spring Boot-->
-      <div class="col me-5">
-        <div class="progress">
-          <div class="progress-bar progress-bar-striped bg-success progress-bar-animated fw-bold" role="progressbar"
-            aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 30%"></div>
-        </div>
-        <h5 class="pt-1 fst-italic">Spring Boot</h5>
-      </div>
-
-      <!--HTML-CSS-BS5-->
-      <div class="col me-5">
-        <div class="progress">
-          <div class="progress-bar progress-bar-striped bg-success progress-bar-animated" role="progressbar"
-            aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 30%"></div>
-        </div>
-        <h5 class="pt-1 fst-italic">HTML-CSS-BS5</h5>
-      </div>
-
-      <!--Angular-->
-      <div class="col me-5">
-        <div class="progress">
-          <div class="progress-bar progress-bar-striped bg-success progress-bar-animated" role="progressbar"
-            aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 30%"></div>
-        </div>
-        <h5 class="pt-1 fst-italic">Angular</h5>
-      </div>
-
-      <!--MySQL-->
-      <div class="col">
-        <div class="progress">
-          <div class="progress-bar progress-bar-striped bg-success progress-bar-animated" role="progressbar"
-            aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 50%"></div>
-        </div>
-        <h5 class="pt-1 fst-italic">My SQL</h5>
-      </div>
-
-
+    </div>
+    <!-- Boton Agregar Lenguaje -->
+    <div class=" col-12 d-flex justify-content-start mb-2">
+      <button class="btn btn-primary btn-circle my-3 ms-3" data-bs-toggle="modal" data-bs-target="#agregarLenguaje"
+        *ngIf="userLogOnStatus">
+        <i class="fa-solid fa-plus"></i> Lenguaje
+      </button>
     </div>
 
     <!--Herramientas informaticas-->
-    <h2 class="pb-2 border-bottom">Herramientas Informáticas</h2>
+    <h2 class="pb-2 border-bottom text-warning">Herramientas Informáticas</h2>
     <div class="row row-cols-1 row-cols-lg-6 g-4 py-4 mb-4">
       <div class="col me-5">
         <div class="progress">
@@ -116,7 +98,7 @@
 
 
 
-
+<!------------------------------------ Modales Para IDIOMA ------------------------------------>
 <!-- Modal Para Agrear Idioma -->
 <div class="modal fade" id="agregarIdioma" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
   aria-labelledby="agregarIdiomaLabel" aria-hidden="true">
@@ -199,8 +181,100 @@
       </div>
 
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="btn-cancelar-editIdioma">Cancelar</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+          id="btn-cancelar-editIdioma">Cancelar</button>
         <button type="button" class="btn btn-primary" (click)="updateIdioma(posicionArrayIdioma)">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!------------------------------------ Modales Para LENGUAJE ------------------------------------>
+<!-- Modal Para Agrear Lenguaje -->
+<div class="modal fade" id="agregarLenguaje" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="agregarLenguajeLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="agregarLenguajeLabel">Agregar Lenguaje de Programación</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body">
+
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="lenguajeLenguaje" placeholder="" [(ngModel)]="lenguajeNuevo.lenguaje">
+          <label for="lenguajeLenguaje">Lenguaje de Programación</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="lenguajeNivel" placeholder="" [(ngModel)]="lenguajeNuevo.nivel">
+          <label for="lenguajeNivel">Nivel (Número del 1 al 100)</label>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="btn-cancelar-lenguajeAgregar"
+          (click)=" getLenguaje()">Cancelar</button>
+        <button type="button" class="btn btn-primary" (click)="addLenguaje()">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Para Borrar Lenguaje-->
+<div class="modal fade" id="borrarLenguaje" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="borrarLenguajeLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="borrarLenguaje">Borrar Lenguaje Programación</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div *ngIf="posicionArrayLenguaje>=0">
+          <h6 class="text-danger">¿Desea borrar el Lenguaje de Programación?</h6>
+          <p *ngIf="posicionArrayLenguaje>=0">{{listLenguaje[posicionArrayLenguaje].lenguaje}} </p>
+        
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+          id="btn-cancelar-borrarLenguaje">Cancelar</button>
+        <button type="button" class="btn btn-danger" (click)="deleteLenguaje(posicionArrayLenguaje)">Borrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Para Editar Lenguaje-->
+<div class="modal fade" id="editLenguaje" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="editLenguajeLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editLenguajeLabel">Editar Lenguaje de Programación</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div *ngIf="posicionArrayLenguaje>=0">
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="lenguajeLenguajeEditar" placeholder=""
+              [(ngModel)]="listLenguaje[posicionArrayLenguaje].lenguaje">
+            <label for="lenguajeLenguajeEditar">Lenguaje de Programación</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="lenguajeNivelEditar" placeholder=""
+              [(ngModel)]="listLenguaje[posicionArrayLenguaje].nivel">
+            <label for="lenguajeNivelEditar">Nivel (Número del 1 al 100)</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+          id="btn-cancelar-editLenguaje">Cancelar</button>
+        <button type="button" class="btn btn-primary" (click)="updateLenguaje(posicionArrayLenguaje)">Guardar</button>
       </div>
     </div>
   </div>

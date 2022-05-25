@@ -8,18 +8,20 @@ import { Persona } from '../models/persona.model';
 })
 export class PersonaService {
 
+  private url: string = "http://localhost:8080/porfolio";
+
   constructor(private http: HttpClient) { }
 
 
   public getData(): Observable<Persona> {
 
-    return this.http.get<Persona>("http://localhost:8080/porfolio/1");
+    return this.http.get<Persona>(this.url+"/1");
   }
 
   public updatePersona(persona: Persona): Observable<Persona> {
 
     console.log(persona);
-    return this.http.put<Persona>("http://localhost:8080/porfolio/editar2/1", persona);
+    return this.http.put<Persona>(this.url+"/editar2/1", persona);
   }
 
 
