@@ -1,40 +1,182 @@
-  <!--PROYECTOS-->
-  <div class="mx-2 mb-3 px-2 text-white border border-2 border-top-0  border-start-0 border-end-0">
-    <h1 class="display-6 ">Proyectos</h1>
-    <div class="row mb-2">
+<!--PROYECTOS-->
+<div class="mx-2 mb-3 px-2 text-white border border-2 border-top-0  border-start-0 border-end-0">
+  <h1 class="display-6 ">Proyectos</h1>
 
-      <!--Poroyecto Portfolio-->
+  <div class="row justify-content-md-center mb-2">
+    <div *ngFor="let proyecto of listProyecto; index as i">
       <div class="col-md-6">
         <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
           <div class="col-auto d-none d-lg-block">
-            <img src="./assets/images/portfolio.jpg" width="312" height="250" alt="Portfolio">
+            <img [src]="proyecto.url_imagen" width="312" height="250" alt="Portfolio">
           </div>
           <div class="col p-4 d-flex flex-column position-static">
-            <strong class="d-inline-block mb-2 text-primary">Sitio Web</strong>
-            <h3 class="mb-0">Portfolio</h3>
-            <div class="mb-1 text-muted">Abr 22</div>
-            <p class="card-text mb-auto">Portfolio creado utilizando HTML, Bootstrap 5, Angular y Spring Boot.</p>
-            <a href="#" class="stretched-link">Visitar Sitio</a>
+            <strong class="d-inline-block mb-2 text-primary">{{proyecto.tipo}}</strong>
+            <h3 class="mb-0">{{proyecto.nombre}}</h3>
+            <div class="mb-1 text-muted">
+              {{proyecto.fecha_creacion}}
+            </div>
+            <p class="card-text mb-auto">{{proyecto.descripcion}}</p>
+            <a [href]="proyecto.url_sitio" class="stretched-link">Visitar</a>
           </div>
-
+        </div>
+        <!-- Botones -->
+        <div class="col-auto align-items-center ms-4 mb-4">
+          <!-- Boton Eliminar Proyecto -->
+          <button class="btn btn-danger btn-circle" (click)="consultaDeleteProyecto(i)" data-bs-toggle="modal"
+            data-bs-target="#borrarProyecto" *ngIf="userLogOnStatus">
+            <i class="fa fa-times"></i>
+          </button>
+          <!-- Boton Editar Proyecto -->
+          <button class="btn btn-success btn-circle mx-2" (click)="consultaDeleteProyecto(i)" data-bs-toggle="modal"
+            data-bs-target="#editProyecto" *ngIf="userLogOnStatus">
+            <i class="fas fa-edit"></i>
+          </button>
         </div>
       </div>
 
-      <!--Poroyecto aplicacion escritorio-->
-      <div class="col-md-6">
-        <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-          <div class="col-auto d-none d-lg-block">
-            <img src="./assets/images/Kinesoft3.jpg" width="312" height="250" alt="KineSoft">
-          </div>
-          <div class="col p-4 d-flex flex-column position-static">
-            <strong class="d-inline-block mb-2 text-primary">Aplicación Escritorio</strong>
-            <h3 class="mb-0">Software de Gestión</h3>
-            <div class="mb-1 text-muted">Dic 20</div>
-            <p class="card-text mb-auto">Software de Gestión de Clientes y Turnos para centro de estética. Creado en Java</p>
-            <a href="#" class="stretched-link">Ver imagénes</a>
-          </div>
+    </div>
+  </div>
 
+  <!-- Boton Agregar Proyecto -->
+  <div class=" col-12 d-flex justify-content-start mb-2">
+    <button class="btn btn-primary btn-circle my-3 ms-3" data-bs-toggle="modal" data-bs-target="#agregarProyecto"
+      *ngIf="userLogOnStatus">
+      <i class="fa-solid fa-plus"></i> Proyecto
+    </button>
+  </div>
+
+</div>
+
+
+
+<!------------------------------------ Modales Para Proyecto ------------------------------------>
+<!-- Modal Para Agrear Proyecto -->
+<div class="modal fade" id="agregarProyecto" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="agregarProyectoLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="agregarProyectoLabel">Agregar Proyecto</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body">
+
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="proyectoNombre" placeholder="" [(ngModel)]="proyectoNuevo.nombre">
+          <label for="proyectoNombre">Nombre Proyecto</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="proyectoTipo" placeholder="" [(ngModel)]="proyectoNuevo.tipo">
+          <label for="proyectoTipo">Tipo Proyecto</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="proyectoDescripcion" placeholder=""
+            [(ngModel)]="proyectoNuevo.descripcion">
+          <label for="proyectoDescripcion">Descripción Proyecto</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="proyectoFecha" placeholder=""
+            [(ngModel)]="proyectoNuevo.fecha_creacion">
+          <label for="proyectoFecha">Fecha Proyecto</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="proyectoUrlImagen" placeholder=""
+            [(ngModel)]="proyectoNuevo.url_imagen">
+          <label for="proyectoUrlImagen">URL Imagen Proyecto</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="proyectoUrlSitio" placeholder=""
+            [(ngModel)]="proyectoNuevo.url_sitio">
+          <label for="proyectoUrlSitio">URL Sitio Proyecto</label>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="btn-cancelar-proyectoAgregar"
+            (click)=" getProyecto()">Cancelar</button>
+          <button type="button" class="btn btn-primary" (click)="addProyecto()">Guardar</button>
         </div>
       </div>
     </div>
   </div>
+</div>
+
+
+<!-- Modal Para Borrar Proyecto-->
+<div class="modal fade" id="borrarProyecto" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="borrarProyectoLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="borrarProyecto">Borrar Proyecto</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div *ngIf="posicionArrayProyecto>=0">
+          <h6 class="text-danger">¿Desea borrar el Proyecto?</h6>
+          <p *ngIf="posicionArrayProyecto>=0">{{listProyecto[posicionArrayProyecto].nombre}} </p>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+          id="btn-cancelar-borrarProyecto">Cancelar</button>
+        <button type="button" class="btn btn-danger"
+          (click)="deleteProyecto(posicionArrayProyecto)">Borrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Para Editar Proyecto-->
+<div class="modal fade" id="editProyecto" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="editProyectoLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editProyectoLabel">Editar Proyecto</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div *ngIf="posicionArrayProyecto>=0">
+
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="proyectoNombre" placeholder=""
+              [(ngModel)]="listProyecto[posicionArrayProyecto].nombre">
+            <label for="proyectoNombre">Nombre Proyecto</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="proyectoTipo" placeholder="" [(ngModel)]="listProyecto[posicionArrayProyecto].tipo">
+            <label for="proyectoTipo">Tipo Proyecto</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="proyectoDescripcion" placeholder=""
+              [(ngModel)]="listProyecto[posicionArrayProyecto].descripcion">
+            <label for="proyectoDescripcion">Descripción Proyecto</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="proyectoFecha" placeholder=""
+              [(ngModel)]="listProyecto[posicionArrayProyecto].fecha_creacion">
+            <label for="proyectoFecha">Fecha Proyecto</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="proyectoUrlImagen" placeholder=""
+              [(ngModel)]="listProyecto[posicionArrayProyecto].url_imagen">
+            <label for="proyectoUrlImagen">URL Imagen Proyecto</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="proyectoUrlSitio" placeholder=""
+              [(ngModel)]="listProyecto[posicionArrayProyecto].url_sitio">
+            <label for="proyectoUrlSitio">URL Sitio Proyecto</label>
+          </div>
+
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+          id="btn-cancelar-editProyecto">Cancelar</button>
+        <button type="button" class="btn btn-primary" (click)="updateProyecto(posicionArrayProyecto)">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
