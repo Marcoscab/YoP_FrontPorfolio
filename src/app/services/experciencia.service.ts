@@ -8,11 +8,13 @@ import { Experiencia } from '../models/experiencia.model';
 })
 export class ExpercienciaService {
 
+  private url: string = "http://localhost:8080/porfolio";
+
   constructor(private http: HttpClient) { }
 
   public getExperciencia(): Observable<Experiencia[]> {
 
-    return this.http.get<Experiencia[]>("http://localhost:8080/porfolio/experiencia/all");
+    return this.http.get<Experiencia[]>(this.url + "/experiencia/all");
   }
 
   public addExperiencia(experiencia: Experiencia): Observable<Experiencia> {
@@ -27,31 +29,31 @@ export class ExpercienciaService {
       "fecha_inicio": experiencia.fecha_inicio,
       "url_logo": experiencia.url_logo
     };
-    return this.http.post<Experiencia>("http://localhost:8080/porfolio/experiencia/add", json);
+    return this.http.post<Experiencia>(this.url + "/experiencia/add", json);
   }
 
-public updateExperiencia(experiencia:Experiencia): Observable<Experiencia>{
-  
-  let json = {
-    "id": experiencia.id,
-    "cargo": experiencia.cargo,
-    "dedicacion": experiencia.dedicacion,
-    "domicilio": experiencia.domicilio,
-    "empresa": experiencia.empresa,
-    "fecha_fin": experiencia.fecha_fin,
-    "fecha_inicio": experiencia.fecha_inicio,
-    "url_logo": experiencia.url_logo
-  };
+  public updateExperiencia(experiencia: Experiencia): Observable<Experiencia> {
 
-  let id= experiencia.id;
+    let json = {
+      "id": experiencia.id,
+      "cargo": experiencia.cargo,
+      "dedicacion": experiencia.dedicacion,
+      "domicilio": experiencia.domicilio,
+      "empresa": experiencia.empresa,
+      "fecha_fin": experiencia.fecha_fin,
+      "fecha_inicio": experiencia.fecha_inicio,
+      "url_logo": experiencia.url_logo
+    };
 
-  return this.http.put<Experiencia>("http://localhost:8080/porfolio/experiencia/edit/"+ {id}, json);
-}
+    let id = experiencia.id;
+
+    return this.http.put<Experiencia>(this.url + "/experiencia/edit/" + { id }, json);
+  }
 
 
-  public deleteExperiencia(id:number): Observable<void>{
+  public deleteExperiencia(id: number): Observable<void> {
 
-     return this.http.delete<void>("http://localhost:8080/porfolio/experiencia/delete/"+id);
+    return this.http.delete<void>(this.url + "/experiencia/delete/" + id);
   }
 
 
