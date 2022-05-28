@@ -10,13 +10,14 @@ export class LenguajeProgramacionService {
 
 
   private url: string = "http://localhost:8080/porfolio";
+  private urlRemote:string = "https://ms-porfolio.herokuapp.com/porfolio";
 
   constructor(private http:HttpClient) { }
 
 
   public getLenguaje():Observable<LenguajeProgramacion[]>{
 
-    return this.http.get<LenguajeProgramacion[]>(this.url+"/habilidad/lenguaje/all");
+    return this.http.get<LenguajeProgramacion[]>(this.urlRemote+"/habilidad/lenguaje/all");
   }
 
   public addLenguaje(lenguaje:LenguajeProgramacion): Observable<void> {
@@ -27,7 +28,7 @@ export class LenguajeProgramacionService {
       "nivel": lenguaje.nivel
     };
 
-    return this.http.post<void>(this.url + "/habilidad/lenguaje/add", json);
+    return this.http.post<void>(this.urlRemote + "/habilidad/lenguaje/add", json);
   }
 
 
@@ -39,14 +40,14 @@ export class LenguajeProgramacionService {
       "nivel": lenguaje.nivel
     };
 
-    return this.http.put<void>(this.url + "/habilidad/lenguaje/edit/" + lenguaje.id, json);
+    return this.http.put<void>(this.urlRemote + "/habilidad/lenguaje/edit/" + lenguaje.id, json);
 
   }
 
 
   public deleteLenguaje(id: number): Observable<void> {
 
-    return this.http.delete<void>(this.url + "/habilidad/lenguaje/delete/" + id);
+    return this.http.delete<void>(this.urlRemote + "/habilidad/lenguaje/delete/" + id);
   }
 
 

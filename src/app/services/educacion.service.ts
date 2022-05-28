@@ -9,13 +9,14 @@ import { Educacion } from '../models/educacion.model';
 export class EducacionService {
 
   private url: string = "http://localhost:8080/porfolio";
+  private urlRemote:string = "https://ms-porfolio.herokuapp.com/porfolio";
 
 
   constructor(private http: HttpClient) { }
 
   public getEducacion(): Observable<Educacion[]> {
 
-    return this.http.get<Educacion[]>(this.url + "/educacion/all");
+    return this.http.get<Educacion[]>(this.urlRemote + "/educacion/all");
   }
 
 
@@ -30,7 +31,7 @@ export class EducacionService {
       "url_logo": educacion.url_logo
     };
 
-    return this.http.post<Educacion>(this.url + "/educacion/add", json);
+    return this.http.post<Educacion>(this.urlRemote + "/educacion/add", json);
 
   }
 
@@ -44,14 +45,14 @@ export class EducacionService {
       "url_logo": educacion.url_logo
     };
 
-    return this.http.put<void>(this.url + "/educacion/edit/" + educacion.id, json);
+    return this.http.put<void>(this.urlRemote + "/educacion/edit/" + educacion.id, json);
 
   }
 
 
   public deleteEducacion(id: number): Observable<void> {
 
-    return this.http.delete<void>(this.url + "/educacion/delete/" + id);
+    return this.http.delete<void>(this.urlRemote + "/educacion/delete/" + id);
   }
 
 

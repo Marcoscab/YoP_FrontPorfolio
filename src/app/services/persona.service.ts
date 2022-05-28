@@ -9,19 +9,20 @@ import { Persona } from '../models/persona.model';
 export class PersonaService {
 
   private url: string = "http://localhost:8080/porfolio";
+  private urlRemote:string = "https://ms-porfolio.herokuapp.com/porfolio";
 
   constructor(private http: HttpClient) { }
 
 
   public getData(): Observable<Persona> {
 
-    return this.http.get<Persona>(this.url+"/1");
+    return this.http.get<Persona>(this.urlRemote+"/1");
   }
 
   public updatePersona(persona: Persona): Observable<Persona> {
 
     console.log(persona);
-    return this.http.put<Persona>(this.url+"/editar2/1", persona);
+    return this.http.put<Persona>(this.urlRemote+"/editar2/1", persona);
   }
 
 

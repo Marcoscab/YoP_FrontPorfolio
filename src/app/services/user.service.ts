@@ -9,6 +9,7 @@ import { Usuario } from '../models/usuario.model';
 export class UserService {
 
   private url: string = "http://localhost:8080/porfolio";
+  private urlRemote:string = "https://ms-porfolio.herokuapp.com/porfolio";
 
   //Variable para saber si el usuario esta logueado.
   private _userLogOnSource = new Subject<boolean>();
@@ -20,7 +21,7 @@ export class UserService {
 
   public getUser(): Observable<Usuario> {
 
-    return this.http.get<Usuario>(this.url + "/user/1");
+    return this.http.get<Usuario>(this.urlRemote + "/user/1");
   }
 
 

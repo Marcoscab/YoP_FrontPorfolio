@@ -9,12 +9,13 @@ import { Experiencia } from '../models/experiencia.model';
 export class ExpercienciaService {
 
   private url: string = "http://localhost:8080/porfolio";
+  private urlRemote:string = "https://ms-porfolio.herokuapp.com/porfolio";
 
   constructor(private http: HttpClient) { }
 
   public getExperciencia(): Observable<Experiencia[]> {
 
-    return this.http.get<Experiencia[]>(this.url + "/experiencia/all");
+    return this.http.get<Experiencia[]>(this.urlRemote + "/experiencia/all");
   }
 
   public addExperiencia(experiencia: Experiencia): Observable<Experiencia> {
@@ -29,7 +30,7 @@ export class ExpercienciaService {
       "fecha_inicio": experiencia.fecha_inicio,
       "url_logo": experiencia.url_logo
     };
-    return this.http.post<Experiencia>(this.url + "/experiencia/add", json);
+    return this.http.post<Experiencia>(this.urlRemote + "/experiencia/add", json);
   }
 
   public updateExperiencia(experiencia: Experiencia): Observable<Experiencia> {
@@ -47,13 +48,13 @@ export class ExpercienciaService {
 
     let id = experiencia.id;
 
-    return this.http.put<Experiencia>(this.url + "/experiencia/edit/" + { id }, json);
+    return this.http.put<Experiencia>(this.urlRemote + "/experiencia/edit/" + { id }, json);
   }
 
 
   public deleteExperiencia(id: number): Observable<void> {
 
-    return this.http.delete<void>(this.url + "/experiencia/delete/" + id);
+    return this.http.delete<void>(this.urlRemote + "/experiencia/delete/" + id);
   }
 
 

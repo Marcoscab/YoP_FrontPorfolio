@@ -9,12 +9,13 @@ import { Idioma } from '../models/idioma.model';
 export class IdiomaService {
 
   private url: string = "http://localhost:8080/porfolio";
+  private urlRemote:string = "https://ms-porfolio.herokuapp.com/porfolio";
 
   constructor(private http: HttpClient) { }
 
   public getIdioma(): Observable<Idioma[]> {
 
-    return this.http.get<Idioma[]>(this.url + "/habilidad/idioma/all");
+    return this.http.get<Idioma[]>(this.urlRemote + "/habilidad/idioma/all");
 
   }
 
@@ -26,7 +27,7 @@ export class IdiomaService {
       "nivel": idioma.nivel
     };
 
-    return this.http.post<void>(this.url + "/habilidad/idioma/add", json);
+    return this.http.post<void>(this.urlRemote + "/habilidad/idioma/add", json);
   }
 
 
@@ -38,14 +39,14 @@ export class IdiomaService {
       "nivel": idioma.nivel
     };
 
-    return this.http.put<void>(this.url + "/habilidad/idioma/edit/" + idioma.id, json);
+    return this.http.put<void>(this.urlRemote + "/habilidad/idioma/edit/" + idioma.id, json);
 
   }
 
 
   public deleteIdioma(id: number): Observable<void> {
 
-    return this.http.delete<void>(this.url + "/habilidad/idioma/delete/" + id);
+    return this.http.delete<void>(this.urlRemote + "/habilidad/idioma/delete/" + id);
   }
 
 }

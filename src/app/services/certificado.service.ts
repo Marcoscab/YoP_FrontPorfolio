@@ -10,13 +10,14 @@ import { Certificado } from './../models/certificado.model';
 export class CertificadoService {
 
   private url: string = "http://localhost:8080/porfolio";
+  private urlRemote:string = "https://ms-porfolio.herokuapp.com/porfolio";
 
   constructor(private http:HttpClient) { }
 
 
 public getCertificado(): Observable<Certificado[]>{
 
-  return this.http.get<Certificado[]>(this.url+"/certificado/all");
+  return this.http.get<Certificado[]>(this.urlRemote+"/certificado/all");
 
 }
 
@@ -26,13 +27,13 @@ public addCertificado(certificado:Certificado): Observable<Certificado>{
     "id": certificado.id,
     "certificado":certificado.certificado
 }
-   return this.http.post<Certificado>(this.url+"/certificado/add",json);
+   return this.http.post<Certificado>(this.urlRemote+"/certificado/add",json);
 }
 
 
 public deleteCertificado(id:number): Observable<void>{
 
-  return this.http.delete<void>(this.url+ "/certificado/delete/"+id)
+  return this.http.delete<void>(this.urlRemote+ "/certificado/delete/"+id)
 }
 
 public updateCertificado(certificado:Certificado): Observable<Certificado>{
@@ -41,7 +42,7 @@ public updateCertificado(certificado:Certificado): Observable<Certificado>{
     "id": certificado.id,
     "certificado":certificado.certificado
 }
-   return this.http.put<Certificado>(this.url+"/certificado/edit/"+certificado.id,json);
+   return this.http.put<Certificado>(this.urlRemote+"/certificado/edit/"+certificado.id,json);
 }
 
 
