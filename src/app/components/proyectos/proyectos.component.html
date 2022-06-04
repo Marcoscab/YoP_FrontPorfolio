@@ -2,8 +2,10 @@
 <div class="mx-2 mb-3 px-2 text-white border border-2 border-top-0  border-start-0 border-end-0">
   <h1 class="display-6 ">Proyectos</h1>
 
-  <div class="row justify-content-md-center mb-2">
-    <div *ngFor="let proyecto of listProyecto; index as i">
+  <div class="row mb-2">
+
+
+    <ng-container *ngFor="let proyecto of listProyecto; index as i">
       <div class="col-md-6">
         <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
           <div class="col-auto d-none d-lg-block">
@@ -33,8 +35,10 @@
           </button>
         </div>
       </div>
+    </ng-container>
 
-    </div>
+
+
   </div>
 
   <!-- Boton Agregar Proyecto -->
@@ -121,8 +125,7 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
           id="btn-cancelar-borrarProyecto">Cancelar</button>
-        <button type="button" class="btn btn-danger"
-          (click)="deleteProyecto(posicionArrayProyecto)">Borrar</button>
+        <button type="button" class="btn btn-danger" (click)="deleteProyecto(posicionArrayProyecto)">Borrar</button>
       </div>
     </div>
   </div>
@@ -146,7 +149,8 @@
             <label for="proyectoNombre">Nombre Proyecto</label>
           </div>
           <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="proyectoTipo" placeholder="" [(ngModel)]="listProyecto[posicionArrayProyecto].tipo">
+            <input type="text" class="form-control" id="proyectoTipo" placeholder=""
+              [(ngModel)]="listProyecto[posicionArrayProyecto].tipo">
             <label for="proyectoTipo">Tipo Proyecto</label>
           </div>
           <div class="form-floating mb-3">
