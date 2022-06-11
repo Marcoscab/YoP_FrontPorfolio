@@ -9,19 +9,20 @@
   <div class="px-2 ">
     <div class="row gx-2 align-items-center">
       <!--Foto Perfil-->
-      <div class="col-lg-2">
-        <div class="p-3"><img class="img-fluid rounded-circle" [src]="persona.url_foto_perfil" alt="Foto Perfil" />
+      <div class="col-lg-2 ">
+        <div class="p-3">
+          <img class="img-fluid rounded-circle mx-auto d-block" [src]="persona.url_foto_perfil" alt="Foto Perfil" />
         </div>
       </div>
       <!--Datos Personales-->
-      <div class="col-lg-3">
+      <div class="col-auto mx-lg-0 mx-auto">
         <div class="p-3 text-white">
           <h2 class="display-6 p-0 text-primary fw-bolder">{{persona.nombre}} {{persona.apellido}}</h2>
           <p class="mb-0"> {{persona.profesion}} en {{persona.empresa_actual}}</p>
           <p class=" fw-light mb-0">{{persona.domicilio}}</p>
         </div>
       </div>
-      <div class="col-lg-7 align-items-start">
+      <div class="col-lg-7 align-items-start mb-3">
         <button class="btn btn-success btn-circle" data-bs-toggle="modal"
           data-bs-target="#staticBackdrop" *ngIf="userLogOnStatus">
           <i class='fas fa-edit'></i>
